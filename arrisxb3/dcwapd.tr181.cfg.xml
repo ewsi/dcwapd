@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2017 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<dataModelInfo>
+  <version>1</version>
+  <moduleName>Dual-Channel WiFi AP Daemon</moduleName>
+  <author>CableLabs</author>
+  <description>COSA TR181 and extension for the Dual-Channel WiFi Daemon</description>
+  <library/>
+  <objects>
+    <object>
+      <name>DCW</name>
+      <objectType>object</objectType>
+      <functions>
+        <func_GetParamBoolValue>CcspCbGetParamBoolValue</func_GetParamBoolValue>
+        <func_GetParamIntValue>CcspCbGetParamIntValue</func_GetParamIntValue>
+        <func_GetParamUlongValue>CcspCbGetParamUlongValue</func_GetParamUlongValue>
+        <func_GetParamStringValue>CcspCbGetParamStringValue</func_GetParamStringValue>
+        <func_SetParamBoolValue>CcspCbSetParamBoolValue</func_SetParamBoolValue>
+        <func_SetParamIntValue>CcspCbSetParamIntValue</func_SetParamIntValue>
+        <func_SetParamUlongValue>CcspCbSetParamUlongValue</func_SetParamUlongValue>
+        <func_SetParamStringValue>CcspCbSetParamStringValue</func_SetParamStringValue>
+
+        <func_Validate>CcspCbValidate</func_Validate>
+        <func_Commit>CcspCbCommit</func_Commit>
+        <func_Rollback>CcspCbRollback</func_Rollback>
+      </functions>
+      <parameters>
+          <parameter>
+            <name>FilterPath</name>
+            <type>string</type>
+            <syntax>string</syntax>
+            <writable>true</writable>
+          </parameter>
+      </parameters>
+
+      <objects>
+        <object>
+          <name>Network</name>
+          <objectType>writableTable</objectType>
+          <maxInstance>1</maxInstance>
+          <functions>
+            <func_GetParamBoolValue>CcspCbGetParamBoolValue</func_GetParamBoolValue>
+            <func_GetParamIntValue>CcspCbGetParamIntValue</func_GetParamIntValue>
+            <func_GetParamUlongValue>CcspCbGetParamUlongValue</func_GetParamUlongValue>
+            <func_GetParamStringValue>CcspCbGetParamStringValue</func_GetParamStringValue>
+            <func_SetParamBoolValue>CcspCbSetParamBoolValue</func_SetParamBoolValue>
+            <func_SetParamIntValue>CcspCbSetParamIntValue</func_SetParamIntValue>
+            <func_SetParamUlongValue>CcspCbSetParamUlongValue</func_SetParamUlongValue>
+            <func_SetParamStringValue>CcspCbSetParamStringValue</func_SetParamStringValue>
+
+            <func_Validate>CcspCbValidate</func_Validate>
+            <func_Commit>CcspCbCommit</func_Commit>
+            <func_Rollback>CcspCbRollback</func_Rollback>
+
+            <func_GetEntryCount>CcspCbGetEntryCount_Network</func_GetEntryCount>
+            <func_GetEntry>CcspCbGetEntry_Network</func_GetEntry>
+            <func_AddEntry>CcspCbAddEntry_Network</func_AddEntry>
+            <func_DelEntry>CcspCbDelEntry_Network</func_DelEntry>
+            <func_IsUpdated>CcspCbIsUpdated_Network</func_IsUpdated>
+            <func_Synchronize>CcspCbSynchronize_Network</func_Synchronize>
+          </functions>
+          <parameters>
+            <parameter>
+              <name>Enable</name>
+              <type>boolean</type>
+              <syntax>bool</syntax>
+              <writable>true</writable>
+            </parameter>
+            <parameter>
+              <name>PrimaryChannelAPIndex</name>
+              <type>unsignedInt</type>
+              <syntax>uint32</syntax>
+              <writable>true</writable>
+            </parameter>
+          </parameters>
+          <objects>
+            <object>
+              <name>DataChannel</name>
+              <objectType>writableTable</objectType>
+              <maxInstance>1</maxInstance>
+              <functions>
+                <func_GetParamUlongValue>CcspCbGetParamUlongValue</func_GetParamUlongValue>
+                <func_SetParamUlongValue>CcspCbSetParamUlongValue</func_SetParamUlongValue>
+
+                <func_Validate>CcspCbValidate</func_Validate>
+                <func_Commit>CcspCbCommit</func_Commit>
+                <func_Rollback>CcspCbRollback</func_Rollback>
+
+                <func_GetEntryCount>CcspCbGetEntryCount_NetworkDataChannel</func_GetEntryCount>
+                <func_GetEntry>CcspCbGetEntry_NetworkDataChannel</func_GetEntry>
+                <func_AddEntry>CcspCbAddEntry_NetworkDataChannel</func_AddEntry>
+                <func_DelEntry>CcspCbDelEntry_NetworkDataChannel</func_DelEntry>
+                <func_IsUpdated>CcspCbIsUpdated_NetworkDataChannel</func_IsUpdated>
+                <func_Synchronize>CcspCbSynchronize_NetworkDataChannel</func_Synchronize>
+              </functions>
+              <parameters>
+                <parameter>
+                  <name>APIndex</name>
+                  <type>unsignedInt</type>
+                  <syntax>uint32</syntax>
+                  <writable>true</writable>
+                </parameter>
+              </parameters>
+            </object>
+          </objects>
+        </object>
+
+        <object>
+          <name>Station</name>
+          <objectType>dynamicTable</objectType>
+          <maxInstance>128</maxInstance>
+          <functions>
+            <func_GetParamBoolValue>CcspCbGetParamBoolValue</func_GetParamBoolValue>
+            <func_GetParamIntValue>CcspCbGetParamIntValue</func_GetParamIntValue>
+            <func_GetParamUlongValue>CcspCbGetParamUlongValue</func_GetParamUlongValue>
+            <func_GetParamStringValue>CcspCbGetParamStringValue</func_GetParamStringValue>
+
+            <func_GetEntryCount>CcspCbGetEntryCount_Station</func_GetEntryCount>
+            <func_GetEntry>CcspCbGetEntry_Station</func_GetEntry>
+            <func_IsUpdated>CcspCbIsUpdated_Station</func_IsUpdated>
+            <func_Synchronize>CcspCbSynchronize_Station</func_Synchronize>
+          </functions>
+          <parameters>
+            <parameter>
+              <name>PrimaryMACAddress</name>
+              <type>string</type>
+              <syntax>string</syntax>
+              <writable>false</writable>
+            </parameter>
+            <parameter>
+              <name>NetworkIndex</name>
+              <type>unsignedInt</type>
+              <syntax>uint32</syntax>
+              <writable>false</writable>
+            </parameter>
+            <parameter>
+              <name>FilterName</name>
+              <type>string</type>
+              <syntax>string</syntax>
+              <writable>false</writable>
+            </parameter>
+          </parameters>
+          <objects>
+            <object>
+              <name>BondedDataChannel</name>
+              <objectType>dynamicTable</objectType>
+              <maxInstance>128</maxInstance>
+              <functions>
+                <func_GetParamBoolValue>CcspCbGetParamBoolValue</func_GetParamBoolValue>
+                <func_GetParamIntValue>CcspCbGetParamIntValue</func_GetParamIntValue>
+                <func_GetParamUlongValue>CcspCbGetParamUlongValue</func_GetParamUlongValue>
+                <func_GetParamStringValue>CcspCbGetParamStringValue</func_GetParamStringValue>
+
+                <func_GetEntryCount>CcspCbGetEntryCount_StationDataChannel</func_GetEntryCount>
+                <func_GetEntry>CcspCbGetEntry_StationDataChannel</func_GetEntry>
+                <func_IsUpdated>CcspCbIsUpdated_StationDataChannel</func_IsUpdated>
+                <func_Synchronize>CcspCbSynchronize_StationDataChannel</func_Synchronize>
+              </functions>
+              <parameters>
+                <parameter>
+                  <name>APIndex</name>
+                  <type>unsignedInt</type>
+                  <syntax>uint32</syntax>
+                  <writable>false</writable>
+                </parameter>
+                <parameter>
+                  <name>MACAddress</name>
+                  <type>string</type>
+                  <syntax>string</syntax>
+                  <writable>false</writable>
+                </parameter>
+              </parameters>
+            </object>
+          </objects>
+        </object>
+
+        <object>
+          <name>Filter</name>
+          <objectType>dynamicTable</objectType>
+          <maxInstance>128</maxInstance>
+          <functions>
+            <func_GetParamStringValue>CcspCbGetParamStringValue</func_GetParamStringValue>
+
+            <func_GetEntryCount>CcspCbGetEntryCount_Filter</func_GetEntryCount>
+            <func_GetEntry>CcspCbGetEntry_Filter</func_GetEntry>
+            <func_IsUpdated>CcspCbIsUpdated_Filter</func_IsUpdated>
+            <func_Synchronize>CcspCbSynchronize_Filter</func_Synchronize>
+          </functions>
+          <parameters>
+            <parameter>
+              <name>Name</name>
+              <type>string</type>
+              <syntax>string</syntax>
+              <writable>false</writable>
+            </parameter>
+          </parameters>
+        </object>
+
+        <object>
+          <name>StationFilterOverride</name>
+          <objectType>writableTable</objectType>
+          <maxInstance>128</maxInstance>
+          <functions>
+            <func_GetParamBoolValue>CcspCbGetParamBoolValue</func_GetParamBoolValue>
+            <func_GetParamIntValue>CcspCbGetParamIntValue</func_GetParamIntValue>
+            <func_GetParamUlongValue>CcspCbGetParamUlongValue</func_GetParamUlongValue>
+            <func_GetParamStringValue>CcspCbGetParamStringValue</func_GetParamStringValue>
+            <func_SetParamBoolValue>CcspCbSetParamBoolValue</func_SetParamBoolValue>
+            <func_SetParamIntValue>CcspCbSetParamIntValue</func_SetParamIntValue>
+            <func_SetParamUlongValue>CcspCbSetParamUlongValue</func_SetParamUlongValue>
+            <func_SetParamStringValue>CcspCbSetParamStringValue</func_SetParamStringValue>
+
+            <func_Validate>CcspCbValidate</func_Validate>
+            <func_Commit>CcspCbCommit</func_Commit>
+            <func_Rollback>CcspCbRollback</func_Rollback>
+
+            <func_GetEntryCount>CcspCbGetEntryCount_StationFilterOverride</func_GetEntryCount>
+            <func_GetEntry>CcspCbGetEntry_StationFilterOverride</func_GetEntry>
+            <func_AddEntry>CcspCbAddEntry_StationFilterOverride</func_AddEntry>
+            <func_DelEntry>CcspCbDelEntry_StationFilterOverride</func_DelEntry>
+            <func_IsUpdated>CcspCbIsUpdated_StationFilterOverride</func_IsUpdated>
+            <func_Synchronize>CcspCbSynchronize_StationFilterOverride</func_Synchronize>
+          </functions>
+          <parameters>
+            <parameter>
+              <name>PrimaryMACAddress</name>
+              <type>string</type>
+              <syntax>string</syntax>
+              <writable>true</writable>
+            </parameter>
+            <parameter>
+              <name>FilterName</name>
+              <type>string</type>
+              <syntax>string</syntax>
+              <writable>true</writable>
+            </parameter>
+          </parameters>
+        </object>
+
+      </objects>
+    </object> <!-- DCW -->
+  </objects>
+</dataModelInfo>
+

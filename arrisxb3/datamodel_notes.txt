@@ -1,0 +1,51 @@
+
+
+
+
+
+
+
+  . Network.1.
+    . Enable = true/false
+    . PrimaryChannelAPIndex = 1 (uint)
+    . DataChannel.1.
+      . APIndex = 2 (uint)
+
+  . StationFilterOverride.1.
+    . PrimaryMACAddress = "11:22:33:44:55:66"
+    . FilterName = "TFP_Default"
+  . StationFilterOverride.2.
+    . PrimaryMACAddress = "11:22:33:44:55:77"
+    . FilterName = "other_filt"
+
+  . Filter.1.
+    . Name = "TFP_Default"
+  . Filter.2.
+    . Name = "other_filt"
+
+  . Station.1.
+    . PrimaryMACAddress = "11:22:33:44:55:66"
+    . NetworkIndex = 1 (uint)
+    . FilterName = "TFP_Default"
+    . BondedDataChannel.1.
+      . MACAddress = "11:22:33:44:55:FF"
+      . APIndex = 2 (uint)
+
+
+
+
+
+
+
+tr181 wifi config items of interest...
+  Device.WiFi.AccessPoint.X.
+    . Security.
+      . KeyPassphrase
+    . SSIDReference -> "Device.WiFi.X."
+      . Device.WiFi.X.SSID -> "Name of SSID"
+
+to list the system APs:
+  dmcli eRT getv Device.WiFi.AccessPoint.
+
+to list the system APs:
+  dmcli eRT getv Device.WiFi.AccessPoint.

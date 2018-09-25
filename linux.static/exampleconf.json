@@ -1,0 +1,34 @@
+
+
+{
+  
+  "filterdirectory": "/tmp",
+
+  "virtualaps": {
+
+
+    "CABLELABS-47D7-2.4": {
+      "bridge": "brlan0",
+      "datachannels": {
+        "CABLELABS-47D7-5": {
+          "bridge": "brdc0"
+        }
+      }
+    }
+
+
+  },
+
+
+  "stations": {
+
+
+    "00-11-22-33-44-55": {
+      "filterprofile": "TFP_Default"
+    }
+
+
+  }
+}
+
+

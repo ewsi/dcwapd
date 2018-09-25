@@ -1,0 +1,16 @@
+
+
+disclaimer: this whole library is just one nasty hack after another, but the idea here is to take the DRY
+approach and minimize the amount or redundant "junk-code" required to integrate a simple component which
+provides configuration to the system CCSP/TR181 data model. basically we crap-up this library so we dont
+have to crap-up the component providing a CCSP/TR181 configuration.
+
+
+The objectives:
+  . Make it EASY to make a component configurable and monitorable via the system CCSP/TR181 data model. 
+  . Reduce the amount of development time required to make a configurable component.
+  . Give the developer time to work on the actual problem at hand, not wasting time on poorly designed APIs.
+
+
+
+

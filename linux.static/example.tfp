@@ -1,0 +1,9 @@
+
+#
+# Example filter file which filters on HTTP and HTTPS (TCP 80 and TCP 443) traffic
+#
+
+*:*:80:tcp:*
+*:*:443:tcp:*
+
+
