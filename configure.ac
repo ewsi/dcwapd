@@ -1,6 +1,12 @@
 AC_INIT(dcwapd, 0.1, j.dennis@cablelabs.com)
 AC_PREREQ(2.63)
 
+
+AC_CHECK_LIB(ffcall, ffcall_get_version, [], [
+echo "You need libffcall"
+exit -1
+])
+
 AC_PROG_CXX
 
 PACKAGE=dcwapd
