@@ -14,4 +14,4 @@ libccspwrapper_la_SOURCES = \
 	ccsp_callbacks.cxx \
 	tr181_scalar.cxx \
 	cdm_client.cxx
-AM_CPPFLAGS = -I$(top_srcdir)  -I$(top_srcdir)/ccsp
+AM_CPPFLAGS = -I$(top_srcdir)  -I${includedir}/ccsp
