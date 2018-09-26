@@ -14,5 +14,3 @@ dcwapd_LDADD =  \
 	../dcw/libdcwapcore.la \
 	../dcwlinux/libdcwlinux.la \
 	../dcwposix/libdcwposix.la
-AM_CPPFLAGS = -I$(top_srcdir)
-AM_CPPFLAGS = -I$(top_srcdir)
