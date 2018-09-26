@@ -1,1 +1,1 @@
-SUBDIRS = arrisxb3 linux.static ccspwrapper dcw dcwposix xb3vapswitch
+SUBDIRS = ccspwrapper dcw dcwposix dcwlinux arrisxb3 linux.static xb3vapswitch
