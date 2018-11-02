@@ -145,13 +145,19 @@ const dcw::TrafficFilterProfile& APConfiguration::GetTrafficFilterProfile(const 
   return *stationTfp->second;
 }
 
-const unsigned APConfiguration::GetMaximumAllowedDataChannels(const dcw::MacAddress& device) const {
-  return 1; //current limitation of macremapper driver if doing interface remapping...
-            //if there is no interface remapping occuring, meaning all data channels reside
-            //on the same layer 2 broadcast domain as the primary channel, (and assuming some
-            //data channel filtering somewhere as well), then we can have more than one data
-            //channel with this implementation...
-            //for now, lets just hard-code this to 1 until there is needed to be supported
+void APConfiguration::FilterPermittedDataChannels(const dcw::MacAddress& device, const unsigned deviceTotalCapableDataChannels, dcw::BasicNetwork::ChannelSet& allowedDataChannels) const {
+  //for now, do nothing...
+  //(let the station have all data channels)
+
+  //note: it is only advised to do this for load-balancing purposes
+  //      the optimal solution is to offer the station all available
+  //      data-channels, then let the stations detemine which is the 
+  //      best setup
+  //
+  //in the future though, this may be used for load-balancing...
+  //here we could algorithmically spread-out the clients on
+  //different data-channels if we have many
+
 }
 
 void APConfiguration::LoadConfiguration(const APConfigurationProvider& conf) {

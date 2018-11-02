@@ -111,21 +111,13 @@ void Controller::OnStationJoin(const MacAddress& primaryMacAddr, const Message& 
     return;
   }
 
-  //ensure that this device is allowed to have at least one data channel
-  unsigned totalDataChannels;
-  totalDataChannels = _devicePolicy.GetMaximumAllowedDataChannels(primaryMacAddr);
-  if (totalDataChannels < 1) {
-    dcwlogwarnf("Got a station join request from %s, but this device is not permitted to have any data channels\n", primaryMacAddr.ToString().c_str());
-    Message reply(DCWMSG_AP_REJECT_STA);
-    reply.ap_reject_sta.data_macaddr_count = m.data_macaddr_count;
-    memcpy(reply.ap_reject_sta.data_macaddrs, m.data_macaddrs, m.data_macaddr_count * 6);
-    ReplyToStation(primaryMacAddr, reply);
-    return;
-  }
-
   //retrieve our network configuration and validate that 
   //we have at least one data ssid
   _network.GetDataChannels(apDataChannels);
+  if (apDataChannels.size() > 0) {
+    //call upon the device policy to filter out if needed...
+    _devicePolicy.FilterPermittedDataChannels(primaryMacAddr, m.data_macaddr_count, apDataChannels);
+  }
   if (apDataChannels.size() == 0) {
     dcwlogwarnf("Got a station join request from %s, but no data SSIDs are available in the network\n", primaryMacAddr.ToString().c_str());
     Message reply(DCWMSG_AP_REJECT_STA);
@@ -135,11 +127,6 @@ void Controller::OnStationJoin(const MacAddress& primaryMacAddr, const Message& 
     return;
   }
 
-  // figure out how many data channels total
-  // to offer to the station
-  if (totalDataChannels > apDataChannels.size()) totalDataChannels = apDataChannels.size();
-  if (totalDataChannels > m.data_macaddr_count)  totalDataChannels = m.data_macaddr_count;
-
   //add declared data mac addresses to client state
   ClientState& state = _clients[primaryMacAddr];
   for (unsigned i = 0; i < m.data_macaddr_count; i++) {
@@ -147,20 +134,18 @@ void Controller::OnStationJoin(const MacAddress& primaryMacAddr, const Message& 
   }
 
   //start forming reply
-  //XXX should the device policy be consulted to determine
-  //XXX which SSIDs are offered back?
   Message reply(DCWMSG_AP_ACCEPT_STA);
-  BasicNetwork::ChannelSet::const_iterator apdc_iter = apDataChannels.begin();
-  reply.ap_accept_sta.data_ssid_count    = totalDataChannels;
-  for (unsigned i = 0; i < totalDataChannels; i++) {
+  BasicNetwork::ChannelSet::const_iterator apdc_iter;
+  reply.ap_accept_sta.data_ssid_count    = apDataChannels.size();
+  unsigned i = 0;
+  for (apdc_iter = apDataChannels.begin(); apdc_iter != apDataChannels.end(); ++apdc_iter, i++) {
     state.permittedChannels[(*apdc_iter)->GetSsidName()] = *apdc_iter;
     strncpy(reply.ap_accept_sta.data_ssids[i], (*apdc_iter)->GetSsidName(), sizeof(reply.ap_accept_sta.data_ssids[i]));
-    ++apdc_iter;
   }
   
   //reply back to the station letting it know which
   //MAC addresses and SSIDs it should use
-  dcwlogdbgf("Telling station %s that it has %u data channel(s) to use\n", primaryMacAddr.ToString().c_str(), totalDataChannels);
+  dcwlogdbgf("Telling station %s that it has %u data channel(s) to use\n", primaryMacAddr.ToString().c_str(), (unsigned)apDataChannels.size());
   ReplyToStation(primaryMacAddr, reply);
 
 }
