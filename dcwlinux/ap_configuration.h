@@ -46,7 +46,7 @@ public:
   void Dump() const;
 
   virtual const dcw::TrafficFilterProfile& GetTrafficFilterProfile(const dcw::MacAddress& device) const;
-  virtual const unsigned GetMaximumAllowedDataChannels(const dcw::MacAddress& device) const;
+  virtual void FilterPermittedDataChannels(const dcw::MacAddress& device, const unsigned deviceTotalCapableDataChannels, dcw::BasicNetwork::ChannelSet& allowedDataChannels) const;
 
 
 private:
