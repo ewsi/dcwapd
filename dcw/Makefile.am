@@ -8,6 +8,6 @@ libdcwcore_la_SOURCES =            \
   message.cxx                      \
   simplenetwork.cxx                \
   stringtrafficfilterprofile.cxx   \
-  trafficfilterprofile.cxx         \
+  trafficfilterprofile.cxx         
 
 AM_CPPFLAGS = -I$(top_srcdir)
