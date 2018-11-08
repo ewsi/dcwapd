@@ -21,5 +21,4 @@ AC_CONFIG_FILES(arrisxb3/Makefile)
 AC_CONFIG_FILES(dcw/Makefile)
 AC_CONFIG_FILES(dcwposix/Makefile)
 AC_CONFIG_FILES(dcwlinux/Makefile)
-AC_CONFIG_FILES(ccspwrapper/Makefile)
 AC_OUTPUT
