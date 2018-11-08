@@ -5,6 +5,7 @@ libdcwlinux_la_SOURCES =                \
   brctlnetwork.cxx                      \
   json_configuration_provider.cxx       \
   macremapper_driver.cxx                \
+  mrmctl.cxx                            \
   vap_manager.cxx                       \
   virtual_ap.cxx
 

@@ -12,7 +12,7 @@
 
 #include "macremapper/user_include/macremapper_filter_config.h" //XXX these files should ultimately be in the include path!!
 #include "macremapper/user_include/macremapper_ioctl.h"         //XXX these files should ultimately be in the include path!!
-#include "mrmctl/filter_conf_parser.h"
+#include "mrmctl/filter_conf_parser.h" //XXX this is terribly hacky... need to eventually fix this...
 
 #include "dcw/dcwlog.h"
 #include "dcw/cfiletrafficfilterprofile.h"
