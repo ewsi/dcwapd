@@ -1,1 +1,1 @@
-SUBDIRS = dcw dcwposix dcwlinux arrisxb3 linux.static
+SUBDIRS = dcw dcwposix dcwlinux arrisxb3
