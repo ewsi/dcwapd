@@ -1,3 +1,5 @@
+ACLOCAL_AMFLAGS = -I m4 --install
+
 lib_LTLIBRARIES = libdcwlinux.la
 
 libdcwlinux_la_SOURCES =                \

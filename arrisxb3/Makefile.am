@@ -1,3 +1,6 @@
+
+ACLOCAL_AMFLAGS = -I m4 --install
+
 AM_CPPFLAGS = -I$(top_srcdir)
 
 bin_PROGRAMS = dcwapd

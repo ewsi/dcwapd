@@ -1,3 +1,6 @@
+
+ACLOCAL_AMFLAGS = -I m4 --install
+
 lib_LTLIBRARIES = libdcwcore.la
 
 libdcwcore_la_SOURCES =            \
@@ -11,3 +14,4 @@ libdcwcore_la_SOURCES =            \
   trafficfilterprofile.cxx         
 
 AM_CPPFLAGS = -I$(top_srcdir)
+

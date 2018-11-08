@@ -1,3 +1,6 @@
+
+ACLOCAL_AMFLAGS = -I m4 --install
+
 lib_LTLIBRARIES = libdcwposix.la
 libdcwposix_la_SOURCES =         \
   eventreactorexitsignaler.cxx   \
