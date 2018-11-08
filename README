@@ -1,0 +1,40 @@
+
+
+
+
+This is the Dual-Channel Wi-Fi Access Point Daemon code...
+
+This depends on:
+  . libdcwproto
+  . libdcwsocket
+  . macremapper
+
+
+Layout of this directory:
+  . dcw/       -- core DCW functionality C++ classes library
+  . dcwlinux/  -- linux DCW functionality C++ classes library
+  . dcwposix/  -- posix DCW functionality C++ classes library
+  . dcwapd.arrisxb3 -- Arris XB3 specific implementation of this program
+  . dcwapd.linuxjsonstatic -- Example implementation of this program using JSON as configuration, statically linked 
+
+
+
+Run "./build_generic_linux.sh" to see an example dependency checkout and full build of this thing.
+
+
+Building for a specifig platform:
+  The platform must be provided to the "configure" script. For example:
+    $ ./configure --enable-platform=linuxjsonstatic
+
+
+
+Adding a new platform:
+  . Create a directory named "dcwapd.NAME_OF_YOUR_PLATFORM"
+  . Copy over "dcwapd.linuxjsonstatic/Makefile.am" into your new platform directory to use as a reference
+  . Update configure.ac
+  . Update Makefile.am (the one in the same directory as the configure.ac file)
+
+
+
+
+

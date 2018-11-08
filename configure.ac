@@ -10,11 +10,34 @@ AM_PROG_AR
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 
+#stuff needed for all platforms...
 AC_CONFIG_FILES(Makefile)
-AC_CONFIG_FILES(arrisxb3/Makefile)
 AC_CONFIG_FILES(dcw/Makefile)
 AC_CONFIG_FILES(dcwposix/Makefile)
 AC_CONFIG_FILES(dcwlinux/Makefile)
+
+#per-platform DCWAPD implementations...
+AC_ARG_ENABLE([platform],
+[  --enable-platform       Build for a specified platform],
+[case "${enableval}" in
+  arrisxb3)         enableplatform=arrisxb3         ;;
+  linuxjsonstatic)  enableplatform=linuxjsonstatic  ;;
+  *) AC_MSG_ERROR([bad platorm value ${enableval} for --enable-platform]) ;;
+esac], [enableplatform=unknown])
+
+
+#platform arrisxb3... (see Makefile.am for usage of PLATFORM_ARRISXB3)
+AM_CONDITIONAL([PLATFORM_ARRISXB3], [test x$enableplatform = xarrisxb3])
+AC_CONFIG_FILES(dcwapd.arrisxb3/Makefile)
+
+
+#platform linuxjsonstatic... (see Makefile.am for usage of PLATFORM_LINUXJSONSTATIC)
+AM_CONDITIONAL([PLATFORM_LINUXJSONSTATIC], [test x$enableplatform = xlinuxjsonstatic])
+AC_CONFIG_FILES(dcwapd.linuxjsonstatic/Makefile)
+
+
+
+
 
 AC_CONFIG_MACRO_DIR([m4])
 
