@@ -1,11 +1,13 @@
 lib_LTLIBRARIES = libdcwcore.la
-libdcwcore_la_SOURCES = \
-	filetrafficfilterprofile.cxx \
-	macaddress.cxx \
-	trafficfilterprofile.cxx \
-	message.cxx \
-	cfiletrafficfilterprofile.cxx \
-	controller.cxx \
-	simplenetwork.cxx \
-	stringtrafficfilterprofile.cxxAM_CPPFLAGS = -I$(top_srcdir)
+
+libdcwcore_la_SOURCES =            \
+  cfiletrafficfilterprofile.cxx    \
+  controller.cxx                   \
+  filetrafficfilterprofile.cxx     \
+  macaddress.cxx                   \
+  message.cxx                      \
+  simplenetwork.cxx                \
+  stringtrafficfilterprofile.cxx   \
+  trafficfilterprofile.cxx         \
+
 AM_CPPFLAGS = -I$(top_srcdir)
