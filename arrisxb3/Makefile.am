@@ -15,4 +15,5 @@ dcwapd_SOURCES =                        \
 dcwapd_LDADD =                       \
   ../dcw/libdcwcore.la               \
   ../dcwlinux/libdcwlinux.la         \
-  ../dcwposix/libdcwposix.la
+  ../dcwposix/libdcwposix.la         \
+  -lccw
