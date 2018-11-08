@@ -8,4 +8,4 @@ libdcwlinux_la_SOURCES =                \
   vap_manager.cxx                       \
   virtual_ap.cxx
 
-AM_CPPFLAGS = -I$(top_srcdir)
+AM_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/dcwlinux/include
