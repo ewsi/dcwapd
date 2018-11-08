@@ -16,7 +16,7 @@ dcwapd_SOURCES =                        \
   tr181_configuration_provider.cxx      
 
 dcwapd_LDADD =                       \
-  ../dcw/libdcwcore.la               \
   ../dcwlinux/libdcwlinux.la         \
   ../dcwposix/libdcwposix.la         \
+  ../dcw/libdcwcore.la               \
   -lccw -lccsp_common -ldbus-1 -lsyscfg
