@@ -16,4 +16,4 @@ dcwapd_LDADD =                       \
   ../dcw/libdcwcore.la               \
   ../dcwlinux/libdcwlinux.la         \
   ../dcwposix/libdcwposix.la         \
-  -lccw
+  -lccw -lccsp_common -ldbus-1 -lsyscfg
