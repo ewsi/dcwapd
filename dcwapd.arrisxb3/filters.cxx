@@ -29,7 +29,7 @@ struct SingleFilter :
 
 
 Filters::Filters() {
-  _scanPath = "/usr/share/dcw/filters";
+  _scanPath = "/var/run/dcw/filters"
 }
 
 Filters::~Filters() {
