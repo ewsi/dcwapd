@@ -92,3 +92,15 @@ void StationTelemetry::PopulateConfigProviderCollection(::ccspwrapper::Tr181Conf
 }
 
 
+void StationTelemetry::Telemetry_OnStationUpdate(const ::dcw::BasicNetwork& network, const ::dcw::MacAddress& primaryMacAddr, const ::dcw::TrafficPolicy::DataChannelMap& dataChannels, const ::dcw::TrafficFilterProfile *trafficFilterProfile) {
+  //
+}
+
+void StationTelemetry::Telemetry_OnForgetStation(const ::dcw::BasicNetwork& network, const ::dcw::MacAddress& primaryMacAddr) {
+  //
+}
+
+void StationTelemetry::Telemetry_Clear() {
+  //
+}
+

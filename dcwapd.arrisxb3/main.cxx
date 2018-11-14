@@ -70,15 +70,26 @@ struct MainRunTask : public ::dcwposix::EventReactorExitSignalHandler {
         dcwlinux::APConfiguration conf(_config);
         dcwlinux::VAPManager      vapman;
 
+        //take the AP configuration and apply it into the VAP manager...
+        //this instanciates the controller and friends...
         conf.Apply(driver, vapman, eventReactor);
 
         driver.Dump();
 
+        //isolate the data-channel for the life of this object...
         ArrisXb3DatachanProvisioner provisioner(_config.Network, _config.Cdm);
+
+        //route the telemetry events from the core dcw controller
+        //to the tr181 model...
+        vapman.SetAllTelemetryCollector(&_config.TelemetryCollector);
 
         dcwlogdbgf("%s\n", "Entering event reactor run()...");
         eventReactor.Run();
         dcwlogdbgf("%s\n", "Exited event reactor run()...");
+
+        //cleanup all telemetry events... (defensive)
+        _config.TelemetryCollector.Telemetry_Clear();
+
         //XXX should probably wipe the macremapper here before "provisioner"
         //XXX goes out of scope as there may be a few second "dead zone" !!
       }
