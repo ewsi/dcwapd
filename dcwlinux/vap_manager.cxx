@@ -86,4 +86,9 @@ void DestroyVAP(const char * const primarySsidName) {
   //
 }
 
+void VAPManager::SetAllTelemetryCollector(::dcw::TelemetryCollector * const tc) {
+  for (VAPSet::const_iterator i = _vaps.begin(); i != _vaps.end(); i++) {
+    (*i)->SetTelemetryCollector(tc);
+  }
+}
 

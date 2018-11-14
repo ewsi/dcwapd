@@ -32,7 +32,8 @@ Controller::Controller(
   _trafficSorter(trafficSorter),
   _network(network),
   _eventReactor(eventReactor),
-  _msgSocket(msgSocket) {
+  _msgSocket(msgSocket),
+  _telemetryCollector(NULL) {
 
   // tell the event reactor to call us when "_msgSocket"
   // can be received from (non-blocking)
@@ -49,6 +50,10 @@ Controller::~Controller() {
   } catch (...) {}
   _eventReactor.UnegisterIOSubscriber(*this);
   dcwloginfof("Controller for '%s' is now unregistered from receiving DCW messages\n", _network.GetPrimaryChannel().GetSsidName());
+}
+
+void Controller::SetTelemetryCollector(TelemetryCollector * const telemetryCollector) {
+  _telemetryCollector = telemetryCollector;
 }
 
 void Controller::OnIOReady(EventReactor::IOProvider& iop) {
@@ -148,11 +153,19 @@ void Controller::OnStationJoin(const MacAddress& primaryMacAddr, const Message& 
   dcwlogdbgf("Telling station %s that it has %u data channel(s) to use\n", primaryMacAddr.ToString().c_str(), (unsigned)apDataChannels.size());
   ReplyToStation(primaryMacAddr, reply);
 
+  //notify telemetry that we have an update for this station...
+  if (_telemetryCollector != NULL)
+    _telemetryCollector->Telemetry_OnStationUpdate(_network, primaryMacAddr, state.policy.dataChannels, NULL);
+
 }
 
 void Controller::OnStationUnjoin(const MacAddress& primaryMacAddr, const Message& msg) {
   const struct dcwmsg_sta_unjoin& m = msg.sta_unjoin;
   dcwlogdbgf("Got a station unjoin request from %s\n", primaryMacAddr.ToString().c_str());
+
+  //tell telemetry to forget this station no matter what...
+  if (_telemetryCollector != NULL)
+    _telemetryCollector->Telemetry_OnForgetStation(_network, primaryMacAddr);
 
   //does the station request have at least one data mac address?
   if (m.data_macaddr_count < 1) {
@@ -277,6 +290,10 @@ void Controller::OnStationAck(const MacAddress& primaryMacAddr, const Message& m
 
     //apply the policy...
     _trafficSorter.ApplyClientTrafficPolicy(primaryMacAddr, state.policy);
+
+    //notify telemetry of the bond....
+    if (_telemetryCollector != NULL)
+      _telemetryCollector->Telemetry_OnStationUpdate(_network, primaryMacAddr, state.policy.dataChannels, state.policy.trafficFilterProfile);
   }
   catch (std::exception& e) {
     dcwlogerrf("Traffic policy application for %s failed.\n", primaryMacAddr.ToString().c_str());
