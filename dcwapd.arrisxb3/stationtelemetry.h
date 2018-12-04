@@ -3,10 +3,13 @@
 
 
 #include "ccspwrapper/tr181_sub_collection_provider.h"
+#include "dcw/telemetrycollector.h"
+
+#include <pthread.h>
 
 class SingleNetwork;
 
-class StationTelemetry : public ::ccspwrapper::AutoDeleteTr181SubCollectionProvider {
+class StationTelemetry : public ::ccspwrapper::AutoDeleteTr181SubCollectionProvider, public ::dcw::TelemetryCollector {
 
 public:
   StationTelemetry(const SingleNetwork& singleNetwork);
@@ -18,12 +21,28 @@ public:
   //Tr181SubCollectionProvider functions...
   virtual void PopulateConfigProviderCollection(::ccspwrapper::Tr181ConfigProvider& parent, ConfigProviderCollection& collection);
 
+  //DCW telemetry event callbacks...
+  virtual void Telemetry_OnStationUpdate(const ::dcw::BasicNetwork& network, const ::dcw::MacAddress& primaryMacAddr, const ::dcw::TrafficPolicy::DataChannelMap& dataChannels, const ::dcw::TrafficFilterProfile *trafficFilterProfile);
+  virtual void Telemetry_OnForgetStation(const ::dcw::BasicNetwork& network, const ::dcw::MacAddress& primaryMacAddr);
+  virtual void Telemetry_Clear();
 
 private:
   StationTelemetry(const StationTelemetry&); //no copy
 
   ::ccspwrapper::ProxyTr181SubCollectionProvider  _stationDataChannelSubCollectionProvider;
   const SingleNetwork&                            _singleNetwork;
+
+
+  // telemetry cache...
+  struct SingleStationState {
+    ::dcw::TrafficPolicy::DataChannelMap   dataChannels;
+    const ::dcw::TrafficFilterProfile     *trafficFilterProfile;
+
+  };
+  typedef std::map< ::dcw::MacAddress, struct SingleStationState >  StationStates;
+  //                ^ station PC macaddr    
+  StationStates _stationStates;
+  pthread_mutex_t _stationStatesLock;
   
 };
 

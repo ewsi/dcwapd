@@ -12,7 +12,8 @@ Tr181ConfigurationProvider::Tr181ConfigurationProvider() :
   _ccspAbstractor("dcwapd.ccsp.cfg.xml", *this),
   Xb3(_singleNetwork, _ccspAbstractor.CDM),
   Network(_singleNetwork),
-  Cdm(_ccspAbstractor.CDM) {
+  Cdm(_ccspAbstractor.CDM),
+  TelemetryCollector(_stationTelemetry) {
   //
 }
 

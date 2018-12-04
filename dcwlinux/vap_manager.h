@@ -7,6 +7,7 @@ namespace dcw {
   struct DevicePolicy;
   struct TrafficSorter;
   struct EventReactor;
+  struct TelemetryCollector;
 };
 
 namespace dcwlinux {
@@ -25,6 +26,8 @@ public:
   VirtualAP& operator[](const char * const primarySsidName) const;
 
   void DestroyVAP(const char * const primarySsidName);
+
+  void SetAllTelemetryCollector(::dcw::TelemetryCollector * const tc);
 };
 
 }; //namespace dcwlinux {

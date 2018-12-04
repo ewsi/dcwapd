@@ -54,6 +54,7 @@ public:
   ArrisXb3Dcw                 Xb3;
   SingleNetwork&              Network;
   ::ccspwrapper::CdmClient&   Cdm;
+  ::dcw::TelemetryCollector&  TelemetryCollector;
 };
 
 

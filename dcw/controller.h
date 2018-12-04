@@ -7,6 +7,7 @@
 #include "./messagesocket.h"
 #include "./trafficsorter.h"
 #include "./devicepolicy.h"
+#include "./telemetrycollector.h"
 
 #include <string>
 #include <map>
@@ -26,6 +27,8 @@ public:
   Controller(const DevicePolicy& devicePolicy, TrafficSorter& trafficSorter, const BasicNetwork& network, EventReactor& eventReactor, MessageSocket& msgSocket);
   virtual ~Controller();
 
+  void SetTelemetryCollector(TelemetryCollector * const telemetryCollector);
+
 private:
   struct ClientState {
     typedef std::map<std::string, const ::dcw::BasicChannel*> PermittedChannelMap;
@@ -35,6 +38,7 @@ private:
   };
   typedef std::map<dcw::MacAddress, ClientState> ClientStateMap;
   ClientStateMap _clients;
+  TelemetryCollector * _telemetryCollector;
 
   virtual void OnIOReady(EventReactor::IOProvider& iop);
   void OnMessage(const MacAddress& source, const Message& msg);
