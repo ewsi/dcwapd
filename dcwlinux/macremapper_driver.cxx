@@ -49,9 +49,9 @@ struct DriverSetFilterFailedException : public std::exception {
     return "Failed to Load the Filter Into the Driver";
   }
 };
-struct OnlyOneChannelDestionationImplementedException : public std::exception {
+struct TooManyDataChannelDestinationsException : public std::exception {
   virtual const char* what() const throw() {
-    return "Currently only one channel destination is implemented!";
+    return "Too Many Data Channels for Replacement Destination Provided!";
   }
 };
 struct RemapFailedException : public std::exception {
@@ -168,25 +168,32 @@ void MacRemapperDriver::ApplyClientTrafficPolicy(const dcw::MacAddress& primaryA
     return;
   }
 
-  //for now, the driver currently only supports one data channel
-  if (dataChannels.size() != 1) {
-    throw OnlyOneChannelDestionationImplementedException();
+  //ensure we dont have too many replacement destinations
+  if (dataChannels.size() > MRM_MAX_REPLACE) {
+    throw TooManyDataChannelDestinationsException();
   }
 
   //populate our remap ioctl()
-  const ::dcw::TrafficPolicy::DataChannelMap::const_iterator& channel = dataChannels.begin();
-  const ::dcw::MacAddress& dest = channel->first;
   bzero(&re, sizeof(re));
   strncpy(re.filter_name, policy.trafficFilterProfile->GetName(), sizeof(re.filter_name));
   memcpy(re.match_macaddr, primaryAddr.Value, sizeof(re.match_macaddr));
-  memcpy(re.replace_macaddr, dest.Value, sizeof(re.replace_macaddr));
 
-  //do we have an interface to remap to?
-  const BrctlChannel * const btctlChannel = dynamic_cast<const BrctlChannel*>(channel->second);
-  if (btctlChannel != NULL) {
-    if (btctlChannel->GetIfName() != NULL) {
-      strncpy(re.replace_ifname, btctlChannel->GetIfName(), sizeof(re.replace_ifname));
+  //add each of the replacements into the remap ioctl() list...
+  for (::dcw::TrafficPolicy::DataChannelMap::const_iterator channel = dataChannels.begin(); channel != dataChannels.end(); ++channel) {
+    //copy over the replacement MAC address...
+    const ::dcw::MacAddress& dest = channel->first;
+    memcpy(re.replace[re.replace_count].macaddr, dest.Value, sizeof(re.replace[re.replace_count].macaddr));
+
+    //do we have an interface to remap to?
+    const BrctlChannel * const btctlChannel = dynamic_cast<const BrctlChannel*>(channel->second);
+    if (btctlChannel != NULL) {
+      if (btctlChannel->GetIfName() != NULL) {
+        strncpy(re.replace[re.replace_count].ifname, btctlChannel->GetIfName(), sizeof(re.replace[re.replace_count].ifname));
+      }
     }
+    
+    //increment the replacement count...
+    ++re.replace_count;
   }
 
   //send it to the driver...
