@@ -14,7 +14,7 @@ struct MacAddressParseException : public std::exception {
     return "MAC Address Parse Exception";
   }
 };
-};
+} // namespace
 
 using namespace dcw;
 

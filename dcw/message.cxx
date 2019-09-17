@@ -17,7 +17,7 @@ struct MessageSerializeException : public std::exception {
     return "Failed to serialize DCW message from buffer!";
   }
 };
-};
+} // namespace
 
 
 using namespace dcw;

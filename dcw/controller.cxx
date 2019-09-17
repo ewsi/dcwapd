@@ -14,7 +14,7 @@ struct UnhandledMessageTypeException : public std::exception {
     return "Unhandled message type";
   }
 };
-};
+} // namespace
 
 using namespace dcw;
 

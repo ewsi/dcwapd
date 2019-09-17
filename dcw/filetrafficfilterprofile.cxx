@@ -27,7 +27,7 @@ struct FOpenFailedException : public std::exception {
     return _msg.c_str();
   }
 };
-};
+} // namespace
 
 using namespace dcw;
 
