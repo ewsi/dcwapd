@@ -18,7 +18,7 @@ struct FOpenFailedException : public std::exception {
     
     return msg;
   }
-  FOpenFailedException(const char * const filename) :
+  explicit FOpenFailedException(const char * const filename) :
     _msg(GenMsg(filename)) {
     //
   }
