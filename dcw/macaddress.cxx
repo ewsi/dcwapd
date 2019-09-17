@@ -43,7 +43,7 @@ MacAddress::MacAddress(const char * const macStr) {
   }
 
   for (int i = 0; i < 6; i++)
-    this->Value[i] = (unsigned char)octets[i];
+    this->Value[i] = static_cast<unsigned char>(octets[i]);
 }
 
 MacAddress::MacAddress(const unsigned char * const value) {
@@ -67,12 +67,12 @@ std::string MacAddress::ToString() const {
   char macStr[24];
 
   snprintf(macStr, sizeof(macStr), "%02X:%02X:%02X:%02X:%02X:%02X",
-    (unsigned)this->Value[0],
-    (unsigned)this->Value[1],
-    (unsigned)this->Value[2],
-    (unsigned)this->Value[3],
-    (unsigned)this->Value[4],
-    (unsigned)this->Value[5]
+    static_cast<unsigned>(this->Value[0]),
+    static_cast<unsigned>(this->Value[1]),
+    static_cast<unsigned>(this->Value[2]),
+    static_cast<unsigned>(this->Value[3]),
+    static_cast<unsigned>(this->Value[4]),
+    static_cast<unsigned>(this->Value[5])
   );
   return std::string(macStr);
 }
