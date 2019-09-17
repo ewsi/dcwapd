@@ -1,9 +1,8 @@
 
 #include "./filetrafficfilterprofile.h"
 
-#include <string.h>
-#include <errno.h>
-
+#include <cerrno>
+#include <cstring>
 #include <exception>
 
 namespace {
@@ -15,7 +14,7 @@ struct FOpenFailedException : public std::exception {
     msg  = "fopen(";
     msg += filename;
     msg  = ") failed: ";
-    msg += strerror(errno);
+    msg += std::strerror(errno);
     
     return msg;
   }

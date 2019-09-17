@@ -1,9 +1,8 @@
 
 #include "./stringtrafficfilterprofile.h"
 
-#include <string.h>
-#include <errno.h>
-
+#include <cerrno>
+#include <cstring>
 #include <exception>
 
 namespace {
@@ -13,7 +12,7 @@ struct FMemOpenFailedException : public std::exception {
     std::string msg;
 
     msg  = "fmemopen() failed: ";
-    msg += strerror(errno);
+    msg += std::strerror(errno);
     
     return msg;
   }

@@ -1,7 +1,7 @@
 
 #include "./message.h"
 
-#include <string.h>
+#include <cstring>
 
 #include <exception>
 
@@ -34,7 +34,7 @@ Message::Message(const Message& rhv) {
   const struct dcwmsg *rhv_m = &rhv;
   struct dcwmsg *lhv_m = this;
 
-  memcpy(lhv_m, rhv_m, sizeof(struct dcwmsg));
+  std::memcpy(lhv_m, rhv_m, sizeof(struct dcwmsg));
 }
 
 
