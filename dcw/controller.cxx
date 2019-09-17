@@ -117,11 +117,11 @@ void Controller::OnStationJoin(const MacAddress& primaryMacAddr, const Message& 
   //retrieve our network configuration and validate that 
   //we have at least one data ssid
   _network.GetDataChannels(apDataChannels);
-  if (apDataChannels.size() > 0) {
+  if (!apDataChannels.empty()) {
     //call upon the device policy to filter out if needed...
     _devicePolicy.FilterPermittedDataChannels(primaryMacAddr, m.data_macaddr_count, apDataChannels);
   }
-  if (apDataChannels.size() == 0) {
+  if (apDataChannels.empty()) {
     dcwlogwarnf("Got a station join request from %s, but no data SSIDs are available in the network\n", primaryMacAddr.ToString().c_str());
     Message reply(DCWMSG_AP_REJECT_STA);
     reply.ap_reject_sta.data_macaddr_count = m.data_macaddr_count;
