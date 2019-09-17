@@ -535,8 +535,8 @@ RAPIDJSON_NAMESPACE_END
 #else
 #define RAPIDJSON_HAS_CXX11_RVALUE_REFS 0
 #endif
-#elif (defined(RAPIDJSON_GNUC) && (RAPIDJSON_GNUC >= RAPIDJSON_VERSION_CODE(4,3,0)) && defined(__GXX_EXPERIMENTAL_CXX0X__)) || \
-      (defined(_MSC_VER) && _MSC_VER >= 1600)
+#elif (defined(RAPIDJSON_GNUC) && (RAPIDJSON_GNUC >= RAPIDJSON_VERSION_CODE(4,3,0)) && defined(__GXX_EXPERIMENTAL_CXX0X__) && \
+      (!defined __UCLIBCXX_MAJOR__)) || (defined(_MSC_VER) && _MSC_VER >= 1600)
 
 #define RAPIDJSON_HAS_CXX11_RVALUE_REFS 1
 #else
