@@ -40,7 +40,7 @@ ProcessSignalManager::~ProcessSignalManager() {
 }
 
 void ProcessSignalManager::RegisterEventHandler(const int signum, ::dcwposix::ProcessSignalManager::EventHandler& eventHandler) {
-  const SignalMap::iterator i = _sigmap.find(signum);
+  SignalMap::iterator i = _sigmap.find(signum);
   if (i == _sigmap.end()) {
     //be sure to preseve the old signal when inserting a new "unseen" signal
     _sigmap[signum].insert(&eventHandler);
@@ -53,7 +53,7 @@ void ProcessSignalManager::RegisterEventHandler(const int signum, ::dcwposix::Pr
 }
 
 void ProcessSignalManager::UnRegisterEventHandler(const int signum, ::dcwposix::ProcessSignalManager::EventHandler& eventHandler) {
-  const SignalMap::iterator i = _sigmap.find(signum);
+  SignalMap::iterator i = _sigmap.find(signum);
 
   if (i == _sigmap.end()) {
     dcwlogwarnf("Attempting to unregister handler %p non-registered process signal #%d\n", &eventHandler, signum);
