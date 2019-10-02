@@ -8,6 +8,11 @@
 #include <unistd.h>
 #include <sys/select.h>
 
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 199309L
+#endif
+#include <time.h>
+
 #include <exception>
 
 namespace {
@@ -112,7 +117,8 @@ void SelectEventReactor::SleepSec(const unsigned seconds) const {
 }
 
 void SelectEventReactor::SleepMs(const unsigned milliseconds) const {
-  usleep(milliseconds * 1000);
+  struct timespec req = { 0, static_cast<long>(milliseconds) * 1000 * 1000};
+  nanosleep(&req, NULL);
 }
 
 void SelectEventReactor::updateNfds() {
