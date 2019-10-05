@@ -10,7 +10,7 @@
 
 namespace {
 struct UnhandledMessageTypeException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Unhandled message type";
   }
 };

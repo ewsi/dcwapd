@@ -25,47 +25,47 @@ using namespace dcwlinux;
 
 namespace {
 struct DriverOpenFailedException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Failed to Open The Driver";
   }
 };
 struct DriverWipeFailedException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Failed to Wipe the Driver";
   }
 };
 struct FilterNameTooLongException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Filter Name Too Long";
   }
 };
 struct FilterFileLoadFailException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Failed to Load Filter File";
   }
 };
 struct DriverSetFilterFailedException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Failed to Load the Filter Into the Driver";
   }
 };
 struct TooManyDataChannelDestinationsException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Too Many Data Channels for Replacement Destination Provided!";
   }
 };
 struct RemapFailedException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Device Filter Remap Failed!";
   }
 };
 struct RemapDeleteFailedException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Device Filter Remap Delete Failed!";
   }
 };
 struct DumpFailedException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Failed to Dump Driver!";
   }
 };

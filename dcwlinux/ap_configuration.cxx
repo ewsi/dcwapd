@@ -11,12 +11,12 @@
 
 namespace {
 struct ReloadRunningConfigurationNotImplementedException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "ReloadRunningConfiguration() Not Yet Implemented";
   }
 };
 struct ValidationFailureException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Failed to validate configuration!";
   }
 };

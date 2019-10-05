@@ -10,7 +10,7 @@
 
 namespace {
 struct DuplicateManagerException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Only one process signal manager may be created!";
   }
 };

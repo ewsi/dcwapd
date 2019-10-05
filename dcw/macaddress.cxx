@@ -10,7 +10,7 @@
 
 namespace {
 struct MacAddressParseException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "MAC Address Parse Exception";
   }
 };

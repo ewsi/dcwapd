@@ -17,7 +17,7 @@
 
 namespace {
 struct IncompatiblePublisherException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Publisher not compatible with this event reactor";
   }
 };

@@ -14,7 +14,7 @@
 
 namespace {
 struct BadWiFiChannelInterfaceException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Bad WiFi Channel Interface Exception";
   }
 };

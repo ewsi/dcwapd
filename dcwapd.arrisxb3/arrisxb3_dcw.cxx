@@ -8,7 +8,7 @@
 
 namespace {
 struct BridgeResoveFailedException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Failed to resolv bridge interface name";
   }
 };
