@@ -20,7 +20,7 @@ struct FMemOpenFailedException : public std::exception {
     _msg(GenMsg()) {
     //
   }
-  virtual ~FMemOpenFailedException() noexcept {}
+  virtual ~FMemOpenFailedException() noexcept = default;
   virtual const char* what() const noexcept {
     return _msg.c_str();
   }

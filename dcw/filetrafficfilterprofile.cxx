@@ -22,7 +22,7 @@ struct FOpenFailedException : public std::exception {
     _msg(GenMsg(filename)) {
     //
   }
-  virtual ~FOpenFailedException() noexcept {}
+  virtual ~FOpenFailedException() noexcept = default;
   virtual const char* what() const noexcept {
     return _msg.c_str();
   }
