@@ -19,16 +19,16 @@ public:
   };
 
   SelectEventReactor();
-  virtual ~SelectEventReactor();
+  ~SelectEventReactor() override;
 
-  virtual void Run();
-  virtual void Stop();
-  virtual void RegisterIOSubscriber(IOSubscriber& sub, EventReactor::IOProvider& pub);
-  virtual void UnegisterIOSubscriber(IOSubscriber& sub);
-  virtual void ArmTimer(Timer& timer, unsigned seconds);
-  virtual void DisarmTimer(Timer& timer);
-  virtual void SleepSec(const unsigned seconds) const;
-  virtual void SleepMs(const unsigned milliseconds) const;
+  void Run() override;
+  void Stop() override;
+  void RegisterIOSubscriber(IOSubscriber& sub, EventReactor::IOProvider& pub) override;
+  void UnegisterIOSubscriber(IOSubscriber& sub) override;
+  void ArmTimer(Timer& timer, unsigned seconds) override;
+  void DisarmTimer(Timer& timer) override;
+  void SleepSec(const unsigned seconds) const override;
+  void SleepMs(const unsigned milliseconds) const override;
 
 private:
   typedef std::set<SelectableIOProvider *> IOPubSet;

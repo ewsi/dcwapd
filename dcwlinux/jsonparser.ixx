@@ -22,8 +22,8 @@ class JSONParserException : public std::exception {
 
   public:
     JSONParserException(const char * const msg) : _msg(msg) { } 
-    virtual ~JSONParserException() noexcept { }
-    virtual const char* what() const noexcept {
+    ~JSONParserException() noexcept override { }
+    const char* what() const noexcept override {
       return _msg.c_str();
     }
 };

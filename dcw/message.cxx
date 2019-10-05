@@ -8,12 +8,12 @@
 
 namespace {
 struct MessageMarshallException : public std::exception {
-  virtual const char* what() const noexcept {
+  const char* what() const noexcept override {
     return "Failed to marshall DCW message from buffer!";
   }
 };
 struct MessageSerializeException : public std::exception {
-  virtual const char* what() const noexcept {
+  const char* what() const noexcept override {
     return "Failed to serialize DCW message from buffer!";
   }
 };

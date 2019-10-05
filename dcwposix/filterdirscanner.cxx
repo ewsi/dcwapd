@@ -12,7 +12,7 @@
 
 namespace {
 struct FilterDirScanFailed : public std::exception {
-  virtual const char* what() const noexcept {
+  const char* what() const noexcept override {
     return "Failed to scan for filter files!";
   }
 };

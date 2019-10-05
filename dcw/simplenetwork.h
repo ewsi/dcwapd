@@ -18,9 +18,9 @@ public:
   SimpleChannel(const char * const ssidName);
   SimpleChannel(const SimpleChannel& rhv);
   explicit SimpleChannel(const BasicChannel& bc);
-  virtual ~SimpleChannel();
+  ~SimpleChannel() override;
 
-  virtual const char *GetSsidName() const;
+  const char *GetSsidName() const override;
 };
 
 //SimpleNetwork -- Simple text-only (ssid) implementation of a network
@@ -30,9 +30,9 @@ class SimpleNetwork : public BasicNetwork {
 
 public:
   explicit SimpleNetwork(const char * const primarySsidName);
-  virtual ~SimpleNetwork();
-  virtual const BasicChannel& GetPrimaryChannel() const;
-  virtual void GetDataChannels(ChannelSet& output) const;
+  ~SimpleNetwork() override;
+  const BasicChannel& GetPrimaryChannel() const override;
+  void GetDataChannels(ChannelSet& output) const override;
   void InsertDataChannel(const char * const ssidName);
 };
 

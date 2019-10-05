@@ -37,7 +37,7 @@ class APConfiguration : public dcw::DevicePolicy {
 
 public:
   explicit APConfiguration(const APConfigurationProvider& initialConfiguration);
-  virtual ~APConfiguration();
+  ~APConfiguration() override;
 
   void Apply(MacRemapperDriver& driver, VAPManager& vapman, ::dcw::EventReactor& eventReactor) const;
 
@@ -45,8 +45,8 @@ public:
 
   void Dump() const;
 
-  virtual const dcw::TrafficFilterProfile& GetTrafficFilterProfile(const dcw::MacAddress& device) const;
-  virtual void FilterPermittedDataChannels(const dcw::MacAddress& device, const unsigned deviceTotalCapableDataChannels, dcw::BasicNetwork::ChannelSet& allowedDataChannels) const;
+  const dcw::TrafficFilterProfile& GetTrafficFilterProfile(const dcw::MacAddress& device) const override;
+  void FilterPermittedDataChannels(const dcw::MacAddress& device, const unsigned deviceTotalCapableDataChannels, dcw::BasicNetwork::ChannelSet& allowedDataChannels) const override;
 
 
 private:

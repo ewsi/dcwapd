@@ -12,17 +12,17 @@
 
 namespace {
 struct VAPNotFoundException : public std::exception {
-  virtual const char* what() const noexcept {
+  const char* what() const noexcept override {
     return "VAP Not Found";
   }
 };
 struct VAPAlreadyExistsException : public std::exception {
-  virtual const char* what() const noexcept {
+  const char* what() const noexcept override {
     return "VAP Already Exists";
   }
 };
 struct VAPAllocationFailedException : public std::exception {
-  virtual const char* what() const noexcept {
+  const char* what() const noexcept override {
     return "VAP Allocation Failed";
   }
 };

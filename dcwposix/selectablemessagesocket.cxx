@@ -13,17 +13,17 @@
 
 namespace {
 struct SelectableMessageSocketOpenException : public std::exception {
-  virtual const char* what() const noexcept {
+  const char* what() const noexcept override {
     return "Failed to open selectable DCW message socket";
   }
 };
 struct MessageSocketRecvException : public std::exception {
-  virtual const char* what() const noexcept {
+  const char* what() const noexcept override {
     return "Failed to recv on socket messag socket";
   }
 };
 struct MessageSocketSendException : public std::exception {
-  virtual const char* what() const noexcept {
+  const char* what() const noexcept override {
     return "Failed to send on socket messag socket";
   }
 };

@@ -13,13 +13,13 @@ namespace dcwposix {
 class SelectableMessageSocket : public dcw::MessageSocket, public SelectEventReactor::SelectableIOProvider {
 public:
   explicit SelectableMessageSocket(const char * const interfaceName);
-  virtual ~SelectableMessageSocket();
+  ~SelectableMessageSocket() override;
 
-  virtual void ReceiveMessage(dcw::MacAddress& source, dcw::Message& msg);
-  virtual void TransmitMessage(const dcw::MacAddress& dest, const dcw::Message& msg);
-  virtual void GetSourceMacAddress(dcw::MacAddress& source);
+  void ReceiveMessage(dcw::MacAddress& source, dcw::Message& msg) override;
+  void TransmitMessage(const dcw::MacAddress& dest, const dcw::Message& msg) override;
+  void GetSourceMacAddress(dcw::MacAddress& source) override;
 
-  virtual int GetSelectableFd() const;
+  int GetSelectableFd() const override;
 
 private:
   SelectableMessageSocket(SelectableMessageSocket& rhv); //no copy

@@ -22,8 +22,8 @@ struct FOpenFailedException : public std::exception {
     _msg(GenMsg(filename)) {
     //
   }
-  virtual ~FOpenFailedException() noexcept = default;
-  virtual const char* what() const noexcept {
+  ~FOpenFailedException() noexcept override = default;
+  const char* what() const noexcept override {
     return _msg.c_str();
   }
 };

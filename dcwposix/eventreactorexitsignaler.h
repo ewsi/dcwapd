@@ -18,8 +18,8 @@ class EventReactorExitSignalHandler : public ::dcwposix::ProcessSignalManager::E
 
 public:
   EventReactorExitSignalHandler(ProcessSignalManager& psm, ::dcw::EventReactor& er);
-  virtual ~EventReactorExitSignalHandler();
-  virtual void OnSignal(int signum);
+  ~EventReactorExitSignalHandler() override;
+  void OnSignal(int signum) override;
 
 };
 
