@@ -193,7 +193,7 @@ void Controller::OnStationUnjoin(const MacAddress& primaryMacAddr, const Message
   //remove any channel bondings matching the provided data channel mac addresses
   for (unsigned i = 0; i < m.data_macaddr_count; i++) {
     const ::dcw::MacAddress dcaddr(m.data_macaddrs[i]);
-    ::dcw::TrafficPolicy::DataChannelMap::iterator dcmEntry = state.policy.dataChannels.find(dcaddr);
+    auto dcmEntry = state.policy.dataChannels.find(dcaddr);
     if (dcmEntry == state.policy.dataChannels.end()) continue;
     if (dcmEntry->second == NULL) {
       dcwlogwarnf("Data channel MAC address %s on client %s is not currently bonded\n", dcaddr.ToString().c_str(), primaryMacAddr.ToString().c_str());
@@ -204,7 +204,7 @@ void Controller::OnStationUnjoin(const MacAddress& primaryMacAddr, const Message
   }
 
   //does this client have any more bonded channels?
-  for (::dcw::TrafficPolicy::DataChannelMap::iterator dcmIter = state.policy.dataChannels.begin();
+  for (auto dcmIter = state.policy.dataChannels.begin();
        dcmIter != state.policy.dataChannels.end(); dcmIter++) {
     if (dcmIter->second != NULL) {
       //yup... the client is still bonded to something...
@@ -236,7 +236,7 @@ void Controller::OnStationAck(const MacAddress& primaryMacAddr, const Message& m
   dcwlogdbgf("Got a station ACK from %s\n", primaryMacAddr.ToString().c_str());
 
   // first make sure this client has actually sent a join first...
-  ClientStateMap::iterator client = _clients.find(primaryMacAddr);
+  auto client = _clients.find(primaryMacAddr);
   if (client == _clients.end()) {
     dcwlogerrf("Got a client ACK without a station join from %s\n", primaryMacAddr.ToString().c_str());
     Message reply(DCWMSG_AP_REJECT_STA);
