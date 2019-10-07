@@ -1,13 +1,11 @@
 
 #include "./controller.h"
-#include "./message.h"
 #include "./macaddress.h"
+#include "./message.h"
 
 #include "./dcwlog.h"
 
-
-#include <string.h>
-
+#include <cstring>
 #include <exception>
 
 namespace {
@@ -16,7 +14,7 @@ struct UnhandledMessageTypeException : public std::exception {
     return "Unhandled message type";
   }
 };
-};
+} // namespace
 
 using namespace dcw;
 
@@ -119,15 +117,15 @@ void Controller::OnStationJoin(const MacAddress& primaryMacAddr, const Message& 
   //retrieve our network configuration and validate that 
   //we have at least one data ssid
   _network.GetDataChannels(apDataChannels);
-  if (apDataChannels.size() > 0) {
+  if (!apDataChannels.empty()) {
     //call upon the device policy to filter out if needed...
     _devicePolicy.FilterPermittedDataChannels(primaryMacAddr, m.data_macaddr_count, apDataChannels);
   }
-  if (apDataChannels.size() == 0) {
+  if (apDataChannels.empty()) {
     dcwlogwarnf("Got a station join request from %s, but no data SSIDs are available in the network\n", primaryMacAddr.ToString().c_str());
     Message reply(DCWMSG_AP_REJECT_STA);
     reply.ap_reject_sta.data_macaddr_count = m.data_macaddr_count;
-    memcpy(reply.ap_reject_sta.data_macaddrs, m.data_macaddrs, m.data_macaddr_count * 6);
+    std::memcpy(reply.ap_reject_sta.data_macaddrs, m.data_macaddrs, m.data_macaddr_count * 6);
     ReplyToStation(primaryMacAddr, reply);
     return;
   }
@@ -145,7 +143,7 @@ void Controller::OnStationJoin(const MacAddress& primaryMacAddr, const Message& 
   unsigned i = 0;
   for (apdc_iter = apDataChannels.begin(); apdc_iter != apDataChannels.end(); ++apdc_iter, i++) {
     state.permittedChannels[(*apdc_iter)->GetSsidName()] = *apdc_iter;
-    strncpy(reply.ap_accept_sta.data_ssids[i], (*apdc_iter)->GetSsidName(), sizeof(reply.ap_accept_sta.data_ssids[i]));
+    std::strncpy(reply.ap_accept_sta.data_ssids[i], (*apdc_iter)->GetSsidName(), sizeof(reply.ap_accept_sta.data_ssids[i]));
   }
   
   //reply back to the station letting it know which
@@ -195,7 +193,7 @@ void Controller::OnStationUnjoin(const MacAddress& primaryMacAddr, const Message
   //remove any channel bondings matching the provided data channel mac addresses
   for (unsigned i = 0; i < m.data_macaddr_count; i++) {
     const ::dcw::MacAddress dcaddr(m.data_macaddrs[i]);
-    const ::dcw::TrafficPolicy::DataChannelMap::iterator dcmEntry = state.policy.dataChannels.find(dcaddr);
+    ::dcw::TrafficPolicy::DataChannelMap::iterator dcmEntry = state.policy.dataChannels.find(dcaddr);
     if (dcmEntry == state.policy.dataChannels.end()) continue;
     if (dcmEntry->second == NULL) {
       dcwlogwarnf("Data channel MAC address %s on client %s is not currently bonded\n", dcaddr.ToString().c_str(), primaryMacAddr.ToString().c_str());
@@ -238,13 +236,13 @@ void Controller::OnStationAck(const MacAddress& primaryMacAddr, const Message& m
   dcwlogdbgf("Got a station ACK from %s\n", primaryMacAddr.ToString().c_str());
 
   // first make sure this client has actually sent a join first...
-  const ClientStateMap::iterator client = _clients.find(primaryMacAddr);
+  ClientStateMap::iterator client = _clients.find(primaryMacAddr);
   if (client == _clients.end()) {
     dcwlogerrf("Got a client ACK without a station join from %s\n", primaryMacAddr.ToString().c_str());
     Message reply(DCWMSG_AP_REJECT_STA);
     reply.ap_reject_sta.data_macaddr_count = m.bonded_data_channel_count;
     for (unsigned i = 0; i < reply.ap_reject_sta.data_macaddr_count; i++) {
-      memcpy(reply.ap_reject_sta.data_macaddrs[i],  m.bonded_data_channels[i].macaddr, sizeof(reply.ap_reject_sta.data_macaddrs[i]));
+      std::memcpy(reply.ap_reject_sta.data_macaddrs[i],  m.bonded_data_channels[i].macaddr, sizeof(reply.ap_reject_sta.data_macaddrs[i]));
     }
     ReplyToStation(primaryMacAddr, reply);
     return;
@@ -262,7 +260,7 @@ void Controller::OnStationAck(const MacAddress& primaryMacAddr, const Message& m
       Message reply(DCWMSG_AP_REJECT_STA);
       reply.ap_reject_sta.data_macaddr_count = m.bonded_data_channel_count;
       for (unsigned i = 0; i < reply.ap_reject_sta.data_macaddr_count; i++) {
-        memcpy(reply.ap_reject_sta.data_macaddrs[i],  m.bonded_data_channels[i].macaddr, sizeof(reply.ap_reject_sta.data_macaddrs[i]));
+        std::memcpy(reply.ap_reject_sta.data_macaddrs[i],  m.bonded_data_channels[i].macaddr, sizeof(reply.ap_reject_sta.data_macaddrs[i]));
       }
       ReplyToStation(primaryMacAddr, reply);
       return;
@@ -274,7 +272,7 @@ void Controller::OnStationAck(const MacAddress& primaryMacAddr, const Message& m
       Message reply(DCWMSG_AP_REJECT_STA);
       reply.ap_reject_sta.data_macaddr_count = m.bonded_data_channel_count;
       for (unsigned i = 0; i < reply.ap_reject_sta.data_macaddr_count; i++) {
-        memcpy(reply.ap_reject_sta.data_macaddrs[i],  m.bonded_data_channels[i].macaddr, sizeof(reply.ap_reject_sta.data_macaddrs[i]));
+        std::memcpy(reply.ap_reject_sta.data_macaddrs[i],  m.bonded_data_channels[i].macaddr, sizeof(reply.ap_reject_sta.data_macaddrs[i]));
       }
       ReplyToStation(primaryMacAddr, reply);
       return;
@@ -309,7 +307,7 @@ void Controller::OnStationNack(const MacAddress& primaryMacAddr, const Message& 
 
   dcwlogdbgf("Got a station NACK from %s Processing as unjoin\n", primaryMacAddr.ToString().c_str());
   m_dst.data_macaddr_count = m_src.data_macaddr_count;
-  memcpy(m_dst.data_macaddrs, m_src.data_macaddrs, sizeof(m_dst.data_macaddrs));
+  std::memcpy(m_dst.data_macaddrs, m_src.data_macaddrs, sizeof(m_dst.data_macaddrs));
   this->OnStationUnjoin(primaryMacAddr, unjoinMsg);
   // XXX WARNING: THIS PROBABLY SHOULD NOT SEND THE DCWMSG_AP_ACK_DISCONNECT AS THE UNJOIN DOES!!
 }

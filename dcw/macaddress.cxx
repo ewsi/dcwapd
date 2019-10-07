@@ -2,8 +2,8 @@
 
 #include "./macaddress.h"
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 #include <exception>
 
@@ -14,27 +14,27 @@ struct MacAddressParseException : public std::exception {
     return "MAC Address Parse Exception";
   }
 };
-};
+} // namespace
 
 using namespace dcw;
 
 
 MacAddress::MacAddress() {
-  memset(this->Value, 0xFF, sizeof(this->Value));
+  std::memset(this->Value, 0xFF, sizeof(this->Value));
 }
 
 MacAddress::MacAddress(const MacAddress& rhv) {
-  memcpy(this->Value, rhv.Value, sizeof(this->Value));
+  std::memcpy(this->Value, rhv.Value, sizeof(this->Value));
 }
 
 MacAddress::MacAddress(const char * const macStr) {
   unsigned octets[6];
 
-  if (sscanf(macStr, "%X-%X-%X-%X-%X-%X",
+  if (std::sscanf(macStr, "%X-%X-%X-%X-%X-%X",
              &octets[0], &octets[1],&octets[2],
              &octets[3],&octets[4],&octets[5]) != 6) {
     // failed to parse with dashes... try colons...
-    if (sscanf(macStr, "%X:%X:%X:%X:%X:%X",
+    if (std::sscanf(macStr, "%X:%X:%X:%X:%X:%X",
                &octets[0], &octets[1],&octets[2],
                &octets[3],&octets[4],&octets[5]) != 6) {
       // failed to parse... throw exception...
@@ -43,11 +43,11 @@ MacAddress::MacAddress(const char * const macStr) {
   }
 
   for (int i = 0; i < 6; i++)
-    this->Value[i] = (unsigned char)octets[i];
+    this->Value[i] = static_cast<unsigned char>(octets[i]);
 }
 
 MacAddress::MacAddress(const unsigned char * const value) {
-  memcpy(this->Value, value, sizeof(this->Value));
+  std::memcpy(this->Value, value, sizeof(this->Value));
 }
 
 MacAddress::~MacAddress() {
@@ -55,24 +55,24 @@ MacAddress::~MacAddress() {
 }
 
 bool MacAddress::operator<(const MacAddress& rhv) const {
-  return memcmp(Value, rhv.Value, sizeof(Value)) < 0;
+  return std::memcmp(Value, rhv.Value, sizeof(Value)) < 0;
 }
 
 bool MacAddress::operator==(const MacAddress& rhv) const {
   if (this == &rhv) return true;
-  return memcmp(Value, rhv.Value, sizeof(Value)) == 0;
+  return std::memcmp(Value, rhv.Value, sizeof(Value)) == 0;
 }
 
 std::string MacAddress::ToString() const {
   char macStr[24];
 
   snprintf(macStr, sizeof(macStr), "%02X:%02X:%02X:%02X:%02X:%02X",
-    (unsigned)this->Value[0],
-    (unsigned)this->Value[1],
-    (unsigned)this->Value[2],
-    (unsigned)this->Value[3],
-    (unsigned)this->Value[4],
-    (unsigned)this->Value[5]
+    static_cast<unsigned>(this->Value[0]),
+    static_cast<unsigned>(this->Value[1]),
+    static_cast<unsigned>(this->Value[2]),
+    static_cast<unsigned>(this->Value[3]),
+    static_cast<unsigned>(this->Value[4]),
+    static_cast<unsigned>(this->Value[5])
   );
   return std::string(macStr);
 }
