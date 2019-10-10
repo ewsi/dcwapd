@@ -139,7 +139,7 @@ void Controller::OnStationJoin(const MacAddress& primaryMacAddr, const Message& 
   //start forming reply
   Message reply(DCWMSG_AP_ACCEPT_STA);
   BasicNetwork::ChannelSet::const_iterator apdc_iter;
-  reply.ap_accept_sta.data_ssid_count    = apDataChannels.size();
+  reply.ap_accept_sta.data_ssid_count = static_cast<unsigned int>(apDataChannels.size());
   unsigned i = 0;
   for (apdc_iter = apDataChannels.begin(); apdc_iter != apDataChannels.end(); ++apdc_iter, i++) {
     state.permittedChannels[(*apdc_iter)->GetSsidName()] = *apdc_iter;
@@ -148,7 +148,7 @@ void Controller::OnStationJoin(const MacAddress& primaryMacAddr, const Message& 
   
   //reply back to the station letting it know which
   //MAC addresses and SSIDs it should use
-  dcwlogdbgf("Telling station %s that it has %u data channel(s) to use\n", primaryMacAddr.ToString().c_str(), (unsigned)apDataChannels.size());
+  dcwlogdbgf("Telling station %s that it has %zu data channel(s) to use\n", primaryMacAddr.ToString().c_str(), apDataChannels.size());
   ReplyToStation(primaryMacAddr, reply);
 
   //notify telemetry that we have an update for this station...

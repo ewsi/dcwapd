@@ -58,7 +58,7 @@ void SelectableMessageSocket::ReceiveMessage(dcw::MacAddress& source, dcw::Messa
     throw MessageSocketRecvException(); // discarded frame...
   }
 
-  msg.Marshall(buf, rv);
+  msg.Marshall(buf, static_cast<unsigned int>(rv));
 }
 
 void SelectableMessageSocket::TransmitMessage(const dcw::MacAddress& dest, const dcw::Message& msg) {
@@ -66,7 +66,7 @@ void SelectableMessageSocket::TransmitMessage(const dcw::MacAddress& dest, const
   unsigned len;
 
   len = msg.Serialize(buf, sizeof(buf));
-  if (dcwsock_send(_sock, buf, len, dest.Value) != (int)len) {
+  if (dcwsock_send(_sock, buf, len, dest.Value) != static_cast<int>(len)) {
     throw MessageSocketSendException();
   }
 }

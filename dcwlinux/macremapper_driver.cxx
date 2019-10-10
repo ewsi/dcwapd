@@ -115,7 +115,7 @@ void MacRemapperDriver::Dump() const {
   //simply dump the driver's line based output into our logger functions
   dcwlogdbgf("%s\n", "MRM Driver Dump:");
   while (fgets(linebuf, sizeof(linebuf), f) != NULL) {
-    dcwlogdbgf("  %.*s", (int)sizeof(linebuf), linebuf);
+    dcwlogdbgf("  %.*s", static_cast<int>(sizeof(linebuf)), linebuf);
   }
 
   fclose(f);
