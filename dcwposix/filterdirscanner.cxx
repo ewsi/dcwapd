@@ -56,7 +56,7 @@ void FilterdirScanner::Scan(FileFilterProfileList& output) {
     filterName.resize(filterName.size() - strlen(matchExtension));
 
     //create the filename with the path...
-    filterFilePath  = _path.c_str();
+    filterFilePath  = _path;
     filterFilePath += '/';
     filterFilePath += de->d_name;
 
