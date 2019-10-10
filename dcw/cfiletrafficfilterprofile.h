@@ -9,7 +9,7 @@ namespace dcw {
 
 class CFileTrafficFilterProfile : public TrafficFilterProfile {
 public:
-  CFileTrafficFilterProfile(const char * const name);
+  explicit CFileTrafficFilterProfile(const char * const name);
   virtual ~CFileTrafficFilterProfile();
   CFileTrafficFilterProfile(const CFileTrafficFilterProfile& rhv); //no reason this can't be copied...
 
@@ -21,7 +21,7 @@ class AutoCFTFP {
 
   FILE * const _openFile;
 public:
-  AutoCFTFP(const CFileTrafficFilterProfile& cftfp);
+  explicit AutoCFTFP(const CFileTrafficFilterProfile& cftfp);
   virtual ~AutoCFTFP();
 
   operator ::FILE*() const;

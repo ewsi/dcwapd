@@ -13,7 +13,7 @@ class JsonConfigurationProvider : public APConfigurationProvider {
   JsonConfigurationProviderGuts * const _guts;
 
 public:
-  JsonConfigurationProvider(const char * const confFilename);
+  explicit JsonConfigurationProvider(const char * const confFilename);
   virtual ~JsonConfigurationProvider();
 
   virtual void InstanciateCFileTrafficFilterProfiles(CFTFPList& output) const;

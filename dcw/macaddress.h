@@ -6,12 +6,12 @@
 namespace dcw {
 
 struct MacAddress {
-  
+
   unsigned char Value[6];
 
   MacAddress();                                   //initialize as broadcast
   MacAddress(const MacAddress& rhv);              //copy
-  MacAddress(const char * const macStr);          //parse string from macStr
+  explicit MacAddress(const char * const macStr); //parse string from macStr
   MacAddress(const unsigned char * const value);  //6-byte value
   virtual ~MacAddress();
 

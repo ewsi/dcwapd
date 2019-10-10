@@ -15,7 +15,7 @@ class FilterdirScanner {
   const std::string _path;
 
 public:
-  FilterdirScanner(const char * const path);
+  explicit FilterdirScanner(const char * const path);
   ~FilterdirScanner();
 
 

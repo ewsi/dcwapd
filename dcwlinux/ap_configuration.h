@@ -36,7 +36,7 @@ class APConfiguration : public dcw::DevicePolicy {
   APConfiguration(const APConfiguration&); //no copy
 
 public:
-  APConfiguration(const APConfigurationProvider& initialConfiguration);
+  explicit APConfiguration(const APConfigurationProvider& initialConfiguration);
   virtual ~APConfiguration();
 
   void Apply(MacRemapperDriver& driver, VAPManager& vapman, ::dcw::EventReactor& eventReactor) const;

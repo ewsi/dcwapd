@@ -28,7 +28,7 @@ class JsonConfigurationProviderGuts : public APConfigurationProvider {
 
 
 public:
-  JsonConfigurationProviderGuts(const char * const confFilename) : _confFilename(confFilename) {
+  explicit JsonConfigurationProviderGuts(const char * const confFilename) : _confFilename(confFilename) {
     JSONParser jp(_confFilename);
 
     if (!jp.IsObject()) {

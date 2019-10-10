@@ -7,7 +7,7 @@ namespace dcw {
 
 class TrafficFilterProfile {
 public:
-  TrafficFilterProfile(const char * const name);
+  explicit TrafficFilterProfile(const char * const name);
   virtual ~TrafficFilterProfile();
   TrafficFilterProfile(const TrafficFilterProfile& rhv); //copy ok for now; may go away in the future if this inherid from this class... tbd...
 
