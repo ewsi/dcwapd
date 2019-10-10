@@ -44,13 +44,13 @@ APConfiguration::~APConfiguration() {
 
 void APConfiguration::Apply(MacRemapperDriver& driver, VAPManager& vapman, ::dcw::EventReactor& eventReactor) const {
   //load the traffic filter profiles into the driver...
-  for (CFTFPMap::const_iterator i = _trafficFilterProfiles.begin(); i != _trafficFilterProfiles.end(); i++) {
+  for (auto i = _trafficFilterProfiles.begin(); i != _trafficFilterProfiles.end(); i++) {
     driver.ParseAndLoadFilter(*i->second); //XXX defensive check for NULL?
   }
 
 
   //instanciate all the virtual APs... (one per primary SSID)
-  for (PrimaryDataMap::const_iterator i = _primaryDataMap.begin(); i != _primaryDataMap.end(); i++) {
+  for (auto i = _primaryDataMap.begin(); i != _primaryDataMap.end(); i++) {
     const char * const pssidName = i->first.c_str();
     const SsidIfnameMap::const_iterator ifnameIter = _ssidIfnameMap.find(pssidName);
     if (ifnameIter == _ssidIfnameMap.end()) {
@@ -70,7 +70,7 @@ void APConfiguration::Apply(MacRemapperDriver& driver, VAPManager& vapman, ::dcw
     );
 
     //give it its data channels...
-    for (SsidSet::const_iterator j = i->second.begin(); j != i->second.end(); j++) {
+    for (auto j = i->second.begin(); j != i->second.end(); j++) {
       const char * const dssidName = j->c_str();
 
       //determine the data channel interface name (if any)
@@ -93,32 +93,32 @@ void APConfiguration::Dump() const {
   dcwlogdbgf("%s\n", "AP Configuration Dump:");
 
   dcwlogdbgf("%s\n", "  Traffic Filter Profiles:");
-  for (CFTFPMap::const_iterator i = _trafficFilterProfiles.begin(); i != _trafficFilterProfiles.end(); i++) {
+  for (auto i = _trafficFilterProfiles.begin(); i != _trafficFilterProfiles.end(); i++) {
     dcwlogdbgf("    %s\n", i->second->GetName());
   }
 
   dcwlogdbgf("%s\n", "  SSIDs:");
-  for (PrimaryDataMap::const_iterator i = _primaryDataMap.begin(); i != _primaryDataMap.end(); i++) {
+  for (auto i = _primaryDataMap.begin(); i != _primaryDataMap.end(); i++) {
     dcwlogdbgf("    Primary '%s'\n", i->first.c_str());
-    for(SsidSet::const_iterator j = i->second.begin(); j != i->second.end(); j++) {
+    for(auto j = i->second.begin(); j != i->second.end(); j++) {
       dcwlogdbgf("      Data '%s'\n", j->c_str());
     }
   }
 
   dcwlogdbgf("%s\n", "  SSID Interfaces:");
-  for (SsidIfnameMap::const_iterator i = _ssidIfnameMap.begin(); i != _ssidIfnameMap.end(); i++) {
+  for (auto i = _ssidIfnameMap.begin(); i != _ssidIfnameMap.end(); i++) {
     dcwlogdbgf("    '%s' -> '%s'\n", i->first.c_str(), i->second.c_str());
   }
 
   dcwlogdbgf("%s\n", "  Station Traffic Filter Profiles:");
-  for (StationCFTFPMap::const_iterator i = _stationFilterProfiles.begin(); i != _stationFilterProfiles.end(); i++) {
+  for (auto i = _stationFilterProfiles.begin(); i != _stationFilterProfiles.end(); i++) {
     dcwlogdbgf("    '%s' -> '%s'\n", i->first.ToString().c_str(), i->second->GetName());
   }
 }
 
 const dcw::TrafficFilterProfile& APConfiguration::GetTrafficFilterProfile(const dcw::MacAddress& device) const {
   //first lookup the TFP name we intend to use for this device...
-  StationCFTFPMap::const_iterator stationTfp = _stationFilterProfiles.find(device);
+  auto stationTfp = _stationFilterProfiles.find(device);
   if (stationTfp == _stationFilterProfiles.end()) {
     //lookup failed... use the default traffic filter profile for this device...
     dcwlogdbgf("Defaulting device %s to default profile\n", device.ToString().c_str());
@@ -183,7 +183,7 @@ void APConfiguration::LoadConfiguration(const APConfigurationProvider& conf) {
   conf.GetPrimarySsids(primarySsids); //XXX... is it a good idea to load directly here? (as opposed to a seperate set declared here on the stack)
 
   //load each primary SSID's configuration...
-  for (SsidSet::const_iterator pssidIter = primarySsids.begin(); pssidIter != primarySsids.end(); pssidIter++) {
+  for (auto pssidIter = primarySsids.begin(); pssidIter != primarySsids.end(); pssidIter++) {
     const char * const pssidName = pssidIter->c_str();
 
     //create an entry in the primary data map...
@@ -207,7 +207,7 @@ void APConfiguration::LoadConfiguration(const APConfigurationProvider& conf) {
     //get the associated data channels for this primary ssid...
     SsidSet dataSsids;
     conf.GetDataSsids(dataSsids, pssidName);
-    for (SsidSet::const_iterator dssidIter = dataSsids.begin(); dssidIter != dataSsids.end(); dssidIter++) {
+    for (auto dssidIter = dataSsids.begin(); dssidIter != dataSsids.end(); dssidIter++) {
       const char * const dssidName = dssidIter->c_str();
 
       //get the data channel's interface name (if any)
@@ -249,7 +249,7 @@ void APConfiguration::Cleanup() {
 
 void APConfiguration::SelfValidate() const {
 
-  for (PrimaryDataMap::const_iterator pdcIter = _primaryDataMap.begin(); pdcIter != _primaryDataMap.end(); pdcIter++) {
+  for (auto pdcIter = _primaryDataMap.begin(); pdcIter != _primaryDataMap.end(); pdcIter++) {
     const char * const pssidName = pdcIter->first.c_str();
 
     //ensure each primary SSID has at least one data channel
@@ -259,7 +259,7 @@ void APConfiguration::SelfValidate() const {
     }
 
     //validate the associated data channels:
-    for (SsidSet::const_iterator dssidIter = pdcIter->second.begin(); dssidIter != pdcIter->second.end(); dssidIter++) {
+    for (auto dssidIter = pdcIter->second.begin(); dssidIter != pdcIter->second.end(); dssidIter++) {
       const char * const dssidName = dssidIter->c_str();
 
       //ensure the data ssid name is NOT used as a primary...
@@ -269,7 +269,7 @@ void APConfiguration::SelfValidate() const {
       }
 
       //warn for each data SSID that does not have an associated network interface
-      SsidIfnameMap::const_iterator sifnIter = _ssidIfnameMap.find(dssidName);
+      auto sifnIter = _ssidIfnameMap.find(dssidName);
       if (sifnIter == _ssidIfnameMap.end()) {
         dcwlogwarnf("Configured data SSID \"%s\" for primary SSID \"%s\" has no associated network interface. Will use the primary interface.\n", dssidName, pssidName);
       }
@@ -277,7 +277,7 @@ void APConfiguration::SelfValidate() const {
 
 
     //ensure each primary SSID has an associated network interface
-    SsidIfnameMap::const_iterator sifnIter = _ssidIfnameMap.find(pssidName);
+    auto sifnIter = _ssidIfnameMap.find(pssidName);
     if (sifnIter == _ssidIfnameMap.end()) {
       dcwlogerrf("Configured primary SSID \"%s\" has no associated network interface\n", pssidName);
       throw ValidationFailureException();
@@ -291,7 +291,7 @@ void APConfiguration::SelfValidate() const {
   }
 
   //ensure we have a default traffic filter profile
-  CFTFPMap::const_iterator tfpIter = _trafficFilterProfiles.find(_defaultProfileName);
+  auto tfpIter = _trafficFilterProfiles.find(_defaultProfileName);
   if (tfpIter == _trafficFilterProfiles.end()) {
     dcwlogerrf("We don't have a default traffic profile (\"%s\")!\n", _defaultProfileName);
     throw ValidationFailureException();

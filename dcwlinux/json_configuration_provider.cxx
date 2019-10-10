@@ -132,7 +132,7 @@ public:
   }
 
   void GetPrimarySsids(SsidSet& output) const override {
-    for (PrimaryChannelMap::const_iterator i = _primaryChannels.begin(); i != _primaryChannels.end(); i++) {
+    for (auto i = _primaryChannels.begin(); i != _primaryChannels.end(); i++) {
       output.insert(i->first);
     }
   }
@@ -141,13 +141,13 @@ public:
     const PrimaryChannelMap::const_iterator pssid = _primaryChannels.find(primarySsid);
     if (pssid == _primaryChannels.end()) return;
 
-    for (DataChannelBridgeMap::const_iterator i = pssid->second.dataChannels.begin(); i != pssid->second.dataChannels.end(); i++) {
+    for (auto i = pssid->second.dataChannels.begin(); i != pssid->second.dataChannels.end(); i++) {
       output.insert(i->first);
     }
   }
 
   const char *GetSsidIfname(const char * const ssid) const override {
-    PrimaryChannelMap::const_iterator pssid = _primaryChannels.find(ssid);
+    auto pssid = _primaryChannels.find(ssid);
     if (pssid != _primaryChannels.end()) {
       if (pssid->second.bridgeName.empty()) {
         return NULL;
@@ -168,7 +168,7 @@ public:
     return NULL;
   }
   void GetStationTrafficFilterProfiles(StationTFPMap& output) const override {
-    for (StationFilterMap::const_iterator i = _stationFilters.begin(); i != _stationFilters.end(); i++) {
+    for (auto i = _stationFilters.begin(); i != _stationFilters.end(); i++) {
       output[i->first] = i->second;
     }
 

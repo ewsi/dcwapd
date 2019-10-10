@@ -89,7 +89,7 @@ void SelectEventReactor::Run() {
 void SelectEventReactor::RegisterIOSubscriber(IOSubscriber& sub, EventReactor::IOProvider& pub) {
 
   dcwlogdbgf("Event Reactor got subscriber %p requesting IO events published from (%p)\n", &sub, &pub);
-  SelectableIOProvider * const lpub = dynamic_cast<SelectableIOProvider *>(&pub);
+  auto * const lpub = dynamic_cast<SelectableIOProvider *>(&pub);
   if (lpub == NULL) {
     throw IncompatiblePublisherException();
   }
@@ -124,7 +124,7 @@ void SelectEventReactor::SleepMs(const unsigned milliseconds) const {
 void SelectEventReactor::updateNfds() {
   _nfds = 0;
   for (IOSubMap::const_iterator subi = _ioSubs.begin(); subi != _ioSubs.end(); subi++) {
-    for (IOPubSet::const_iterator pubi = subi->second.begin(); pubi != subi->second.end(); pubi++) {
+    for (auto pubi = subi->second.begin(); pubi != subi->second.end(); pubi++) {
       const int nfd = (*pubi)->GetSelectableFd() + 1;
       if (nfd > _nfds) _nfds = nfd;
     }

@@ -153,7 +153,7 @@ void MacRemapperDriver::ApplyClientTrafficPolicy(const dcw::MacAddress& primaryA
   dcwloginfof("Applying MRM remap for device %s using traffic filter profile: %s\n", primaryAddr.ToString().c_str(), policy.trafficFilterProfile->GetName());
 
   //first filter out the unbonded data channels (NULL BasicChannel*)
-  for (::dcw::TrafficPolicy::DataChannelMap::const_iterator i = policy.dataChannels.begin() ; i != policy.dataChannels.end(); i++) {
+  for (auto i = policy.dataChannels.begin() ; i != policy.dataChannels.end(); i++) {
     if (i->second != NULL) {
       dataChannels[i->first] = i->second;
     }
@@ -185,7 +185,7 @@ void MacRemapperDriver::ApplyClientTrafficPolicy(const dcw::MacAddress& primaryA
     memcpy(re.replace[re.replace_count].macaddr, dest.Value, sizeof(re.replace[re.replace_count].macaddr));
 
     //do we have an interface to remap to?
-    const BrctlChannel * const btctlChannel = dynamic_cast<const BrctlChannel*>(channel->second);
+    const auto * const btctlChannel = dynamic_cast<const BrctlChannel*>(channel->second);
     if (btctlChannel != NULL) {
       if (btctlChannel->GetIfName() != NULL) {
         strncpy(re.replace[re.replace_count].ifname, btctlChannel->GetIfName(), sizeof(re.replace[re.replace_count].ifname));
