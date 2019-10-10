@@ -93,8 +93,8 @@ void ProcessSignalManager::OnSignal(int signum) {
   }
 
   //fire off this signal to each registered handler...
-  for (auto handlerIter = i->second.begin(); handlerIter != i->second.end(); handlerIter++) {
-    (*handlerIter)->OnSignal(signum);
+  for (auto handlerIter : i->second) {
+    handlerIter->OnSignal(signum);
   }
 }
 
