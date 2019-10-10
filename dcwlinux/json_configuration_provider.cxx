@@ -10,7 +10,7 @@
 namespace dcwlinux {
 
 class JsonConfigurationProviderGuts : public APConfigurationProvider {
-  JsonConfigurationProviderGuts(const JsonConfigurationProviderGuts&); //no copy
+  JsonConfigurationProviderGuts(const JsonConfigurationProviderGuts&) = delete; //no copy
   const std::string _confFilename;
 
   typedef std::map<std::string, std::string>  DataChannelBridgeMap;
