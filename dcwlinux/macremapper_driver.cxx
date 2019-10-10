@@ -160,7 +160,7 @@ void MacRemapperDriver::ApplyClientTrafficPolicy(const dcw::MacAddress& primaryA
   }
 
   //did we get a policy application request for zero bonded data channels?
-  if (dataChannels.size() == 0) {
+  if (dataChannels.empty()) {
     //client has no bonded data channels...
     //remove any mapping...
     dcwlogdbgf("Requested application of a zero bonded data channel traffic policy for %s. Removing instead...\n", primaryAddr.ToString().c_str());
