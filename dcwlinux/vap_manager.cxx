@@ -6,7 +6,7 @@
 #include "dcw/dcwlog.h"
 #include "dcw/devicepolicy.h"
 
-#include <string.h>
+#include <cstring>
 
 #include <exception>
 

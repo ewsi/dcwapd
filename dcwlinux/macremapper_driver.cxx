@@ -5,10 +5,10 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <string.h>
+#include <cstring>
 #include <strings.h>
-#include <stdio.h>
-#include <errno.h>
+#include <cstdio>
+#include <cerrno>
 
 #include <macremapper_filter_config.h>
 #include <macremapper_ioctl.h>

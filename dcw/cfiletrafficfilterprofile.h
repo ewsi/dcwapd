@@ -3,7 +3,7 @@
 
 #include "./trafficfilterprofile.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 namespace dcw {
 
@@ -13,18 +13,18 @@ public:
   virtual ~CFileTrafficFilterProfile();
   CFileTrafficFilterProfile(const CFileTrafficFilterProfile& rhv); //no reason this can't be copied...
 
-  virtual FILE *fopen() const = 0;
+  virtual std::FILE *fopen() const = 0;
 };
 
 class AutoCFTFP {
   AutoCFTFP(const AutoCFTFP&); //no copy
 
-  FILE * const _openFile;
+  std::FILE * const _openFile;
 public:
   explicit AutoCFTFP(const CFileTrafficFilterProfile& cftfp);
   virtual ~AutoCFTFP();
 
-  operator ::FILE*() const;
+  operator std::FILE*() const;
 };
 
 } // namespace dcw

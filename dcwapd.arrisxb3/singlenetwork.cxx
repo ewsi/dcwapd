@@ -2,8 +2,8 @@
 
 #include "./singlenetwork.h"
 
-#include <string.h>
-#include <signal.h>
+#include <cstring>
+#include <csignal>
 #include <unistd.h>
 #include <sys/types.h>
 

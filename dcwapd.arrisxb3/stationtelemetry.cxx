@@ -8,7 +8,7 @@
 #include "dcw/macaddress.h"
 #include "dcw/dcwlog.h"
 
-#include <string.h>
+#include <cstring>
 
 namespace {
 

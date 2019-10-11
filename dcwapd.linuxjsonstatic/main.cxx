@@ -1,5 +1,5 @@
 
-#include <string.h>
+#include <cstring>
 
 #include "dcwposix/processsignalmanager.h"
 #include "dcwposix/eventreactorexitsignaler.h"

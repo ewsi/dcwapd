@@ -5,8 +5,8 @@
 
 #include <sys/types.h>
 #include <dirent.h>
-#include <string.h>
-#include <errno.h>
+#include <cstring>
+#include <cerrno>
 
 #include <exception>
 

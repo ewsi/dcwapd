@@ -3,15 +3,15 @@
 
 #include "dcw/dcwlog.h"
 
-#include <errno.h>
-#include <string.h>
+#include <cerrno>
+#include <cstring>
 #include <unistd.h>
 #include <sys/select.h>
 
 #ifndef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 199309L
 #endif
-#include <time.h>
+#include <ctime>
 
 #include <exception>
 
