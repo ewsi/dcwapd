@@ -9,7 +9,7 @@ struct EventReactor {
     virtual ~Timer() {}
     virtual void OnFire() = 0;
   };
-  
+
   struct IOProvider {
     virtual ~IOProvider() {}
   };
@@ -29,6 +29,6 @@ struct EventReactor {
   virtual void SleepMs(const unsigned milliseconds) const = 0;
 };
 
-}; //namespace dcw {
+} // namespace dcw
 
 #endif //#ifndef EVENTREACTOR_H_INCLUDED

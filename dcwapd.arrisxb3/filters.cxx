@@ -25,7 +25,7 @@ struct SingleFilter :
   }
 };
 
-}
+} // namespace
 
 
 Filters::Filters() {

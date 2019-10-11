@@ -26,7 +26,7 @@ struct TrafficSorter {
   virtual void RemoveClientTrafficPolicy(const MacAddress& primaryAddr) = 0;
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 #endif // #ifndef TRAFFICSORTER_H_INCLUDED

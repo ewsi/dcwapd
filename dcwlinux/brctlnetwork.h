@@ -45,7 +45,7 @@ public:
 
 };
 
-}; //namespace dcwlinux {
+} // namespace dcwlinux
 
 
 #endif // #ifndef BRCTLNETWORK_H_INCLUDED

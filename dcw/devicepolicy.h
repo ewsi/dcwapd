@@ -14,6 +14,6 @@ struct DevicePolicy {
   virtual void FilterPermittedDataChannels(const MacAddress& device, const unsigned deviceTotalCapableDataChannels, BasicNetwork::ChannelSet& allowedDataChannels) const = 0;
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 #endif //#ifndef DEVICEPOLICY_H_INCLUDED

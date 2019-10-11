@@ -36,7 +36,7 @@ public:
   void InsertDataChannel(const char * const ssidName);
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 #endif //#ifndef SIMPLENETWORK_H_INCLUDED

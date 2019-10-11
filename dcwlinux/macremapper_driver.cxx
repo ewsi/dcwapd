@@ -69,7 +69,7 @@ struct DumpFailedException : public std::exception {
     return "Failed to Dump Driver!";
   }
 };
-};
+} // namespace
 
 const char _driverFilename[] = "/proc/macremapctl";
 

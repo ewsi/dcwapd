@@ -20,7 +20,7 @@ struct ValidationFailureException : public std::exception {
     return "Failed to validate configuration!";
   }
 };
-};
+} // namespace
 
 
 

@@ -23,7 +23,7 @@ public:
   virtual void GetStationTrafficFilterProfiles(StationTFPMap& output) const;
 };
 
-}; //namespace dcwlinux {
+} // namespace dcwlinux
 
 
 #endif //#ifndef JSON_CONFIGURATION_PROVIDER_H_INCLUDED

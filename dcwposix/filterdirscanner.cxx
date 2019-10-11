@@ -16,7 +16,7 @@ struct FilterDirScanFailed : public std::exception {
     return "Failed to scan for filter files!";
   }
 };
-};
+} // namespace
 
 using namespace dcwposix;
 

@@ -21,7 +21,7 @@ struct IncompatiblePublisherException : public std::exception {
     return "Publisher not compatible with this event reactor";
   }
 };
-};
+} // namespace
 
 using namespace dcwposix;
 

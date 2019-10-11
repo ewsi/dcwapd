@@ -15,6 +15,6 @@ struct MessageSocket : public virtual EventReactor::IOProvider {
   virtual void GetSourceMacAddress(MacAddress& source) = 0;
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 #endif //#define MESSAGESOCKET_H_INCLUDED

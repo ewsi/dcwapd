@@ -21,7 +21,7 @@ struct MacAddress {
   std::string ToString() const;
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 #endif //#ifndef MACADDRESS_H_INCLUDED

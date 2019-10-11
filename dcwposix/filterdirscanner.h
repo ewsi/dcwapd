@@ -23,6 +23,6 @@ public:
   void Scan(FileFilterProfileList& output);
 };
 
-} //namespace dcwposix {
+} // namespace dcwposix
 
 #endif //#ifndef FILTERDIRSCANNER_H_INCLUDED

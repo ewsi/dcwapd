@@ -12,7 +12,7 @@
 
 namespace dcw {
   struct EventReactor;
-};
+} // namespace dcw
 
 namespace dcwlinux {
 
@@ -68,7 +68,7 @@ private:
 
 };
 
-}; //namespace dcwlinux {
+} // namespace dcwlinux
 
 
 #endif //#ifndef AP_CONFIGURATION_H_INCLUDED

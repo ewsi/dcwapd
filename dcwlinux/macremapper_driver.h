@@ -5,7 +5,7 @@
 
 namespace dcw {
   class CFileTrafficFilterProfile;
-};
+} // namespace dcw
 
 namespace dcwlinux {
 
@@ -31,7 +31,7 @@ private:
   int _fd;
 };
 
-}; //namespace linuxdcw {
+} // namespace dcwlinux
 
 
 

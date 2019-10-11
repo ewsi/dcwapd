@@ -53,7 +53,7 @@ private:
 
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 

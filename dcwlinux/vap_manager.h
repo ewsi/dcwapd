@@ -8,7 +8,7 @@ namespace dcw {
   struct TrafficSorter;
   struct EventReactor;
   struct TelemetryCollector;
-};
+} // namespace dcw
 
 namespace dcwlinux {
 
@@ -30,6 +30,6 @@ public:
   void SetAllTelemetryCollector(::dcw::TelemetryCollector * const tc);
 };
 
-}; //namespace dcwlinux {
+} // namespace dcwlinux
 
 #endif //#ifndef VAP_MANAGER_H_INCLUDED

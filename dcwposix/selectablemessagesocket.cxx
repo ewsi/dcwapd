@@ -27,7 +27,7 @@ struct MessageSocketSendException : public std::exception {
     return "Failed to send on socket messag socket";
   }
 };
-};
+} // namespace
 
 using namespace dcwposix;
 

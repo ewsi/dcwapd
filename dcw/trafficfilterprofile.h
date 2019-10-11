@@ -18,6 +18,6 @@ private:
 
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 #endif //#ifndef TRAFFICFILTERPROFILE_H_INCLUDED

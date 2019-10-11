@@ -19,7 +19,7 @@ private:
   const std::string _contents;
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 #endif // #ifndef STRINGTRAFFICFILTERPROFILE_H_INCLUDED

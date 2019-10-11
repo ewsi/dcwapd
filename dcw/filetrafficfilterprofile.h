@@ -19,7 +19,7 @@ private:
   const std::string _filename;
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 #endif // #ifndef FILETRAFFICFILTERPROFILE_H_INCLUDED

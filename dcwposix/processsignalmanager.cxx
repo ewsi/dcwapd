@@ -14,7 +14,7 @@ struct DuplicateManagerException : public std::exception {
     return "Only one process signal manager may be created!";
   }
 };
-};
+} // namespace
 
 
 using namespace dcwposix;

@@ -175,7 +175,7 @@ public:
   }
 };
 
-}; //namespace dcwlinux
+} // namespace dcwlinux
 
 
 using namespace dcwlinux;

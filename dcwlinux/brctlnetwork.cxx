@@ -18,7 +18,7 @@ struct BadWiFiChannelInterfaceException : public std::exception {
     return "Bad WiFi Channel Interface Exception";
   }
 };
-};
+} // namespace
 
 using namespace dcwlinux;
 

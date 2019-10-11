@@ -27,7 +27,7 @@ public:
   operator ::FILE*() const;
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 #endif // #ifndef CFILETRAFFICFILTERPROFILE_H_INCLUDED

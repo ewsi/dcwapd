@@ -27,6 +27,6 @@ private:
   dcw_socket_t _sock;
 };
 
-}; //namespace dcwposix {
+} // namespace dcwposix
 
 #endif //#ifndef SELECTABLEMESSAGESOCKET_H_INCLUDED

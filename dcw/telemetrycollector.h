@@ -18,7 +18,7 @@ struct TelemetryCollector {
 
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 #endif //#ifndef TELEMETRYCOLLECTOR_H_INCLUDED
 

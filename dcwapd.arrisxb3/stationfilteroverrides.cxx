@@ -79,7 +79,7 @@ public:
   virtual void Commit() { }
   virtual void Rollback() { }
 };
-};
+} // namespace
 
 StationFilterOverrides::StationFilterOverrides() {
   //

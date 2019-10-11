@@ -14,7 +14,7 @@ struct Message : public ::dcwmsg {
   unsigned Serialize(unsigned char * const buf, const unsigned size) const;
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 #endif //#ifndef MESSAGE_H_INCLUDED

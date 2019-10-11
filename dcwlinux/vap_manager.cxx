@@ -26,7 +26,7 @@ struct VAPAllocationFailedException : public std::exception {
     return "VAP Allocation Failed";
   }
 };
-}; //namespace {
+} // namespace
 
 using namespace dcwlinux;
 
