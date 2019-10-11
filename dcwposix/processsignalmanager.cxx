@@ -44,7 +44,7 @@ void ProcessSignalManager::RegisterEventHandler(const int signum, ::dcwposix::Pr
   if (i == _sigmap.end()) {
     //be sure to preseve the old signal when inserting a new "unseen" signal
     _sigmap[signum].insert(&eventHandler);
-    _sigmapPreserve[signum] = signal(signum, &this->OnSignal);
+    _sigmapPreserve[signum] = signal(signum, &dcwposix::ProcessSignalManager::OnSignal);
     dcwlogdbgf("Event handler %p registered for new process signal #%d \n", &eventHandler, signum);
     return;
   }
