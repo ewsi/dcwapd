@@ -8,7 +8,7 @@
 namespace {
 struct FMemOpenFailedException : public std::exception {
   const std::string _msg;
-  std::string GenMsg() {
+  static std::string GenMsg() {
     std::string msg;
 
     msg  = "fmemopen() failed: ";

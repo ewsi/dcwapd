@@ -41,7 +41,7 @@ public:
 
   void Apply(MacRemapperDriver& driver, VAPManager& vapman, ::dcw::EventReactor& eventReactor) const;
 
-  void ReloadRunningConfiguration(const APConfigurationProvider& newConfiguration);
+  static void ReloadRunningConfiguration(const APConfigurationProvider& newConfiguration);
 
   void Dump() const;
 
