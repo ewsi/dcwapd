@@ -3,8 +3,8 @@
 #define TRAFFICSORTER_H_INCLUDED
 
 #include "./macaddress.h"
-#include "./trafficfilterprofile.h"
 #include "./network.h"
+#include "./trafficfilterprofile.h"
 
 #include <map>
 

@@ -1,8 +1,8 @@
 
 
 #include "./selectablemessagesocket.h"
-#include "dcw/message.h"
 #include "dcw/macaddress.h"
+#include "dcw/message.h"
 
 #include "dcw/dcwlog.h"
 

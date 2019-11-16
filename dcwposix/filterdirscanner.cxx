@@ -3,10 +3,10 @@
 
 #include "dcw/dcwlog.h"
 
-#include <sys/types.h>
-#include <dirent.h>
-#include <cstring>
 #include <cerrno>
+#include <cstring>
+#include <dirent.h>
+#include <sys/types.h>
 
 #include <exception>
 

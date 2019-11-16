@@ -1,13 +1,13 @@
 #ifndef AP_CONFIGURATION_H_INCLUDED
 #define AP_CONFIGURATION_H_INCLUDED
 
-#include "dcw/devicepolicy.h"
 #include "dcw/cfiletrafficfilterprofile.h"
+#include "dcw/devicepolicy.h"
 #include "dcw/macaddress.h"
 
-#include <set>
 #include <list>
 #include <map>
+#include <set>
 #include <string>
 
 namespace dcw {

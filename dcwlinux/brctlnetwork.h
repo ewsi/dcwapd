@@ -9,9 +9,8 @@
 
 #include "dcw/network.h"
 
-
-#include <string>
 #include <list>
+#include <string>
 
 namespace dcwlinux {
 

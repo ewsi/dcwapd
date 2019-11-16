@@ -5,8 +5,8 @@
 
 #include <cerrno>
 #include <cstring>
-#include <unistd.h>
 #include <sys/select.h>
+#include <unistd.h>
 
 #ifndef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 199309L
