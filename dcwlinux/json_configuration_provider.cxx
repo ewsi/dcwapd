@@ -4,8 +4,8 @@
 
 #include "./jsonparser.ixx"
 
-#include "dcwposix/filterdirscanner.h"
 #include "dcw/macaddress.h"
+#include "dcwposix/filterdirscanner.h"
 
 namespace dcwlinux {
 
@@ -28,7 +28,7 @@ class JsonConfigurationProviderGuts : public APConfigurationProvider {
 
 
 public:
-  JsonConfigurationProviderGuts(const char * const confFilename) : _confFilename(confFilename) {
+  explicit JsonConfigurationProviderGuts(const char * const confFilename) : _confFilename(confFilename) {
     JSONParser jp(_confFilename);
 
     if (!jp.IsObject()) {
@@ -175,7 +175,7 @@ public:
   }
 };
 
-}; //namespace dcwlinux
+} // namespace dcwlinux
 
 
 using namespace dcwlinux;

@@ -8,7 +8,7 @@
 namespace {
 struct FOpenFailedException : public std::exception {
   const std::string _msg;
-  std::string GenMsg(const char * const filename) {
+  static std::string GenMsg(const char * const filename) {
     std::string msg;
 
     msg  = "fopen(";

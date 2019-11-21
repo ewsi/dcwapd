@@ -17,7 +17,7 @@ class SimpleChannel : public BasicChannel {
 public:
   SimpleChannel(const char * const ssidName);
   SimpleChannel(const SimpleChannel& rhv);
-  SimpleChannel(const BasicChannel& bc);
+  explicit SimpleChannel(const BasicChannel& bc);
   virtual ~SimpleChannel();
 
   virtual const char *GetSsidName() const;
@@ -29,14 +29,14 @@ class SimpleNetwork : public BasicNetwork {
   std::list<SimpleChannel>  _dataChannels;
 
 public:
-  SimpleNetwork(const char * const primarySsidName);
+  explicit SimpleNetwork(const char * const primarySsidName);
   virtual ~SimpleNetwork();
   virtual const BasicChannel& GetPrimaryChannel() const;
   virtual void GetDataChannels(ChannelSet& output) const;
   void InsertDataChannel(const char * const ssidName);
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 #endif //#ifndef SIMPLENETWORK_H_INCLUDED

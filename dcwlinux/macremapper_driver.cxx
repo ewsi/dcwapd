@@ -1,21 +1,21 @@
 #include "./macremapper_driver.h"
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/ioctl.h>
+#include <cerrno>
+#include <cstdio>
+#include <cstring>
 #include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
 #include <strings.h>
-#include <stdio.h>
-#include <errno.h>
+#include <sys/ioctl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include <macremapper_filter_config.h>
 #include <macremapper_ioctl.h>
 #include <mrm_filter_conf_parser.h>
 
-#include "dcw/dcwlog.h"
 #include "dcw/cfiletrafficfilterprofile.h"
+#include "dcw/dcwlog.h"
 
 #include "./brctlnetwork.h"
 
@@ -69,7 +69,7 @@ struct DumpFailedException : public std::exception {
     return "Failed to Dump Driver!";
   }
 };
-};
+} // namespace
 
 const char _driverFilename[] = "/proc/macremapctl";
 
@@ -115,7 +115,7 @@ void MacRemapperDriver::Dump() const {
   //simply dump the driver's line based output into our logger functions
   dcwlogdbgf("%s\n", "MRM Driver Dump:");
   while (fgets(linebuf, sizeof(linebuf), f) != NULL) {
-    dcwlogdbgf("  %.*s", (int)sizeof(linebuf), linebuf);
+    dcwlogdbgf("  %.*s", static_cast<int>(sizeof(linebuf)), linebuf);
   }
 
   fclose(f);
@@ -160,7 +160,7 @@ void MacRemapperDriver::ApplyClientTrafficPolicy(const dcw::MacAddress& primaryA
   }
 
   //did we get a policy application request for zero bonded data channels?
-  if (dataChannels.size() == 0) {
+  if (dataChannels.empty()) {
     //client has no bonded data channels...
     //remove any mapping...
     dcwlogdbgf("Requested application of a zero bonded data channel traffic policy for %s. Removing instead...\n", primaryAddr.ToString().c_str());

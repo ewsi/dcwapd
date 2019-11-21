@@ -1,18 +1,18 @@
 #ifndef AP_CONFIGURATION_H_INCLUDED
 #define AP_CONFIGURATION_H_INCLUDED
 
-#include "dcw/devicepolicy.h"
 #include "dcw/cfiletrafficfilterprofile.h"
+#include "dcw/devicepolicy.h"
 #include "dcw/macaddress.h"
 
-#include <set>
 #include <list>
 #include <map>
+#include <set>
 #include <string>
 
 namespace dcw {
   struct EventReactor;
-};
+} // namespace dcw
 
 namespace dcwlinux {
 
@@ -36,12 +36,12 @@ class APConfiguration : public dcw::DevicePolicy {
   APConfiguration(const APConfiguration&); //no copy
 
 public:
-  APConfiguration(const APConfigurationProvider& initialConfiguration);
+  explicit APConfiguration(const APConfigurationProvider& initialConfiguration);
   virtual ~APConfiguration();
 
   void Apply(MacRemapperDriver& driver, VAPManager& vapman, ::dcw::EventReactor& eventReactor) const;
 
-  void ReloadRunningConfiguration(const APConfigurationProvider& newConfiguration);
+  static void ReloadRunningConfiguration(const APConfigurationProvider& newConfiguration);
 
   void Dump() const;
 
@@ -68,7 +68,7 @@ private:
 
 };
 
-}; //namespace dcwlinux {
+} // namespace dcwlinux
 
 
 #endif //#ifndef AP_CONFIGURATION_H_INCLUDED

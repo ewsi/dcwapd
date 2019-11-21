@@ -32,6 +32,6 @@ public:
   void RenameDataChannel(const char * const oldSsid, const char * const newSsid);
 };
 
-} //namespace dcwlinux {
+} // namespace dcwlinux
 
 #endif

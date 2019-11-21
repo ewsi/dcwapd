@@ -1,8 +1,8 @@
 
 #include "./ap_configuration.h"
 #include "./macremapper_driver.h"
-#include "./virtual_ap.h"
 #include "./vap_manager.h"
+#include "./virtual_ap.h"
 
 #include "dcw/dcwlog.h"
 
@@ -20,7 +20,7 @@ struct ValidationFailureException : public std::exception {
     return "Failed to validate configuration!";
   }
 };
-};
+} // namespace
 
 
 

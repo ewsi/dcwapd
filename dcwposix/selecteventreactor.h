@@ -41,7 +41,7 @@ private:
   IOSubMap _ioSubs;
 };
 
-}; //namespace dcwposix {
+} // namespace dcwposix
 
 
 #endif //#ifndef SELECTEVENTREACTOR_H_INCLUDED

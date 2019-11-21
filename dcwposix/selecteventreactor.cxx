@@ -3,15 +3,15 @@
 
 #include "dcw/dcwlog.h"
 
-#include <errno.h>
-#include <string.h>
-#include <unistd.h>
+#include <cerrno>
+#include <cstring>
 #include <sys/select.h>
+#include <unistd.h>
 
 #ifndef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 199309L
 #endif
-#include <time.h>
+#include <ctime>
 
 #include <exception>
 
@@ -21,7 +21,7 @@ struct IncompatiblePublisherException : public std::exception {
     return "Publisher not compatible with this event reactor";
   }
 };
-};
+} // namespace
 
 using namespace dcwposix;
 

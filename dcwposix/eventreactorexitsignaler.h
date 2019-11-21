@@ -5,7 +5,7 @@
 
 namespace dcw {
 struct EventReactor;
-};
+} // namespace dcw
 
 
 namespace dcwposix {
@@ -23,6 +23,6 @@ public:
 
 };
 
-}; //namespace dcwposix {
+} // namespace dcwposix
 
 #endif //#ifndef EVENTREACTOREXITSIGNALER_H_INCLUDED

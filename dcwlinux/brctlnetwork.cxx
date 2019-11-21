@@ -6,10 +6,10 @@
 
 #include <exception>
 
-#include <sys/types.h>
+#include <cstring>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
-#include <string.h>
 
 
 namespace {
@@ -18,7 +18,7 @@ struct BadWiFiChannelInterfaceException : public std::exception {
     return "Bad WiFi Channel Interface Exception";
   }
 };
-};
+} // namespace
 
 using namespace dcwlinux;
 

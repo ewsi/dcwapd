@@ -13,7 +13,7 @@ struct ActivateDataChannelFailedException : public std::exception {
     return "Failed to activate data channel";
   }
 };
-};
+} // namespace
 
 
 ArrisXb3DatachanProvisioner::ArrisXb3DatachanProvisioner(const SingleNetwork& singleNetwork, ::ccspwrapper::CdmClient& cdm) :

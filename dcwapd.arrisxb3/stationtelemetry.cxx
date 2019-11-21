@@ -8,7 +8,7 @@
 #include "dcw/macaddress.h"
 #include "dcw/dcwlog.h"
 
-#include <string.h>
+#include <cstring>
 
 namespace {
 
@@ -88,12 +88,12 @@ struct SingleStation :
     }
     for (::dcw::TrafficPolicy::DataChannelMap::const_iterator i = _dataChannels.begin(); i != _dataChannels.end(); ++i) { 
       collection.push_back(new SingleStationDataChannel(i->first, _singleNetwork));
-      //Note: if you are looking for the delete it can be found in 
+      //Note: if you are looking for the delete it can be found in
       //      the base class "AutoDeleteTr181SubCollectionProvider"
     }
   }
 };
-} //namespace
+} // namespace
 
 
 

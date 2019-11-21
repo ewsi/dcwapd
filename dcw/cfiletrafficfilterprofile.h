@@ -3,31 +3,31 @@
 
 #include "./trafficfilterprofile.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 namespace dcw {
 
 class CFileTrafficFilterProfile : public TrafficFilterProfile {
 public:
-  CFileTrafficFilterProfile(const char * const name);
+  explicit CFileTrafficFilterProfile(const char * const name);
   virtual ~CFileTrafficFilterProfile();
   CFileTrafficFilterProfile(const CFileTrafficFilterProfile& rhv); //no reason this can't be copied...
 
-  virtual FILE *fopen() const = 0;
+  virtual std::FILE *fopen() const = 0;
 };
 
 class AutoCFTFP {
   AutoCFTFP(const AutoCFTFP&); //no copy
 
-  FILE * const _openFile;
+  std::FILE * const _openFile;
 public:
-  AutoCFTFP(const CFileTrafficFilterProfile& cftfp);
+  explicit AutoCFTFP(const CFileTrafficFilterProfile& cftfp);
   virtual ~AutoCFTFP();
 
-  operator ::FILE*() const;
+  operator std::FILE*() const;
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 #endif // #ifndef CFILETRAFFICFILTERPROFILE_H_INCLUDED

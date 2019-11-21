@@ -2,7 +2,7 @@
 #include "./eventreactorexitsignaler.h"
 #include "dcw/eventreactor.h"
 
-#include <signal.h>
+#include <csignal>
 
 static const int _exitSignals[] = {
   SIGINT,

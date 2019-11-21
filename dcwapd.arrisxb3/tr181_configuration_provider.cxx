@@ -4,7 +4,7 @@
 
 #include "dcw/dcwlog.h"
 
-#include <string.h>
+#include <cstring>
 
 
 Tr181ConfigurationProvider::Tr181ConfigurationProvider() :

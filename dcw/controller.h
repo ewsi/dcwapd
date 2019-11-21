@@ -2,15 +2,15 @@
 #ifndef CONTROLLER_H_INCLUDED
 #define CONTROLLER_H_INCLUDED
 
-#include "./network.h"
+#include "./devicepolicy.h"
 #include "./eventreactor.h"
 #include "./messagesocket.h"
-#include "./trafficsorter.h"
-#include "./devicepolicy.h"
+#include "./network.h"
 #include "./telemetrycollector.h"
+#include "./trafficsorter.h"
 
-#include <string>
 #include <map>
+#include <string>
 
 namespace dcw {
 
@@ -53,7 +53,7 @@ private:
 
 };
 
-}; //namespace dcw
+} // namespace dcw
 
 
 

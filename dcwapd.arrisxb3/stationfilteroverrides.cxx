@@ -3,7 +3,7 @@
 
 #include "ccspwrapper/tr181_config_provider.h"
 
-#include <string.h>
+#include <cstring>
 #include <arpa/inet.h>
 
 namespace {
@@ -79,7 +79,7 @@ public:
   virtual void Commit() { }
   virtual void Rollback() { }
 };
-};
+} // namespace
 
 StationFilterOverrides::StationFilterOverrides() {
   //

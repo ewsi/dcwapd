@@ -9,9 +9,8 @@
 
 #include "dcw/network.h"
 
-
-#include <string>
 #include <list>
+#include <string>
 
 namespace dcwlinux {
 
@@ -45,7 +44,7 @@ public:
 
 };
 
-}; //namespace dcwlinux {
+} // namespace dcwlinux
 
 
 #endif // #ifndef BRCTLNETWORK_H_INCLUDED

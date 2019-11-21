@@ -18,6 +18,6 @@ struct BasicNetwork {
   virtual void GetDataChannels(ChannelSet& output) const = 0;
 };
 
-};
+} // namespace dcw
 
 #endif //#ifndef NETWORK_H_INCLUDED

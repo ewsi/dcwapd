@@ -3,10 +3,10 @@
 
 #include "dcw/dcwlog.h"
 
-#include <sys/types.h>
+#include <cerrno>
+#include <cstring>
 #include <dirent.h>
-#include <string.h>
-#include <errno.h>
+#include <sys/types.h>
 
 #include <exception>
 
@@ -16,7 +16,7 @@ struct FilterDirScanFailed : public std::exception {
     return "Failed to scan for filter files!";
   }
 };
-};
+} // namespace
 
 using namespace dcwposix;
 
@@ -32,7 +32,7 @@ FilterdirScanner::~FilterdirScanner() {
 
 void FilterdirScanner::Scan(FileFilterProfileList& output) {
   DIR *d;
-  struct dirent de, *pde;
+  struct dirent *de;
   std::string filterName;
   std::string filterFilePath;
   static const char matchExtension[] = ".tfp";
@@ -45,21 +45,20 @@ void FilterdirScanner::Scan(FileFilterProfileList& output) {
     throw FilterDirScanFailed();
   }
 
-  while (readdir_r(d, &de, &pde) == 0) {
-    if (pde == NULL) break;
-    if (de.d_name[0] == '.') continue; // ignore file starting with a "."
-    if (strlen(de.d_name) < strlen(matchExtension)) continue; //filename too short
-    if (strcmp(&de.d_name[strlen(de.d_name) - strlen(matchExtension)], matchExtension) != 0) continue; //not a matching extension...
+  while ((de = readdir(d))) {
+    if (de->d_name[0] == '.') continue; // ignore file starting with a "."
+    if (strlen(de->d_name) < strlen(matchExtension)) continue; //filename too short
+    if (strcmp(&de->d_name[strlen(de->d_name) - strlen(matchExtension)], matchExtension) != 0) continue; //not a matching extension...
 
     //found a file with a matching extension...
     //dissect the filter name... (filename without the extension)
-    filterName = de.d_name;
+    filterName = de->d_name;
     filterName.resize(filterName.size() - strlen(matchExtension));
 
     //create the filename with the path...
     filterFilePath  = _path.c_str();
     filterFilePath += '/';
-    filterFilePath += de.d_name;
+    filterFilePath += de->d_name;
 
     dcwloginfof("Discovered a filter file: %s\n", filterFilePath.c_str());
 

@@ -6,7 +6,7 @@
 #include "dcw/dcwlog.h"
 #include "dcw/devicepolicy.h"
 
-#include <string.h>
+#include <cstring>
 
 #include <exception>
 
@@ -26,7 +26,7 @@ struct VAPAllocationFailedException : public std::exception {
     return "VAP Allocation Failed";
   }
 };
-}; //namespace {
+} // namespace
 
 using namespace dcwlinux;
 

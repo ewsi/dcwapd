@@ -12,7 +12,7 @@ struct BridgeResoveFailedException : public std::exception {
     return "Failed to resolv bridge interface name";
   }
 };
-};
+} // namespace
 
 
 

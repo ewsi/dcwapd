@@ -35,6 +35,6 @@ private:
   SignalMapPreserve  _sigmapPreserve;
 };
 
-}; //namespace dcwposix {
+} // namespace dcwposix
 
 #endif //#ifndef PROCESSSIGNALMANAGER_H_INCLUDED

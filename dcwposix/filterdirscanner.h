@@ -15,7 +15,7 @@ class FilterdirScanner {
   const std::string _path;
 
 public:
-  FilterdirScanner(const char * const path);
+  explicit FilterdirScanner(const char * const path);
   ~FilterdirScanner();
 
 
@@ -23,6 +23,6 @@ public:
   void Scan(FileFilterProfileList& output);
 };
 
-} //namespace dcwposix {
+} // namespace dcwposix
 
 #endif //#ifndef FILTERDIRSCANNER_H_INCLUDED

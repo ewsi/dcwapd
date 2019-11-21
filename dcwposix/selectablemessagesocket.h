@@ -12,7 +12,7 @@ namespace dcwposix {
 
 class SelectableMessageSocket : public dcw::MessageSocket, public SelectEventReactor::SelectableIOProvider {
 public:
-  SelectableMessageSocket(const char * const interfaceName);
+  explicit SelectableMessageSocket(const char * const interfaceName);
   virtual ~SelectableMessageSocket();
 
   virtual void ReceiveMessage(dcw::MacAddress& source, dcw::Message& msg);
@@ -27,6 +27,6 @@ private:
   dcw_socket_t _sock;
 };
 
-}; //namespace dcwposix {
+} // namespace dcwposix
 
 #endif //#ifndef SELECTABLEMESSAGESOCKET_H_INCLUDED
