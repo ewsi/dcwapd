@@ -14,7 +14,7 @@
 
 namespace {
 struct BadWiFiChannelInterfaceException : public std::exception {
-  virtual const char* what() const throw() {
+  const char* what() const noexcept override {
     return "Bad WiFi Channel Interface Exception";
   }
 };
@@ -95,7 +95,7 @@ const ::dcw::BasicChannel& BrctlNetwork::GetPrimaryChannel() const {
 }
 
 void BrctlNetwork::GetDataChannels(ChannelSet& output) const {
-  for (std::list<BrctlChannel>::const_iterator i = _dataChannels.begin(); i != _dataChannels.end(); i++) {
+  for (auto i = _dataChannels.begin(); i != _dataChannels.end(); i++) {
     output.insert(&(*i));
   }
 }

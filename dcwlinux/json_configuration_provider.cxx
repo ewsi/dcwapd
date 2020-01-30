@@ -10,7 +10,7 @@
 namespace dcwlinux {
 
 class JsonConfigurationProviderGuts : public APConfigurationProvider {
-  JsonConfigurationProviderGuts(const JsonConfigurationProviderGuts&); //no copy
+  JsonConfigurationProviderGuts(const JsonConfigurationProviderGuts&) = delete; //no copy
   const std::string _confFilename;
 
   typedef std::map<std::string, std::string>  DataChannelBridgeMap;
@@ -117,11 +117,11 @@ public:
     }
   }
 
-  virtual ~JsonConfigurationProviderGuts() {
+  ~JsonConfigurationProviderGuts() override {
     //
   }
 
-  virtual void InstanciateCFileTrafficFilterProfiles(CFTFPList& output) const {
+  void InstanciateCFileTrafficFilterProfiles(CFTFPList& output) const override {
     ::dcwposix::FilterdirScanner::FileFilterProfileList ffpl;
     ::dcwposix::FilterdirScanner dirScanner(_filterDirectory.c_str());
     dirScanner.Scan(ffpl);
@@ -131,23 +131,23 @@ public:
     }
   }
 
-  virtual void GetPrimarySsids(SsidSet& output) const {
-    for (PrimaryChannelMap::const_iterator i = _primaryChannels.begin(); i != _primaryChannels.end(); i++) {
+  void GetPrimarySsids(SsidSet& output) const override {
+    for (auto i = _primaryChannels.begin(); i != _primaryChannels.end(); i++) {
       output.insert(i->first);
     }
   }
 
-  virtual void GetDataSsids(SsidSet& output, const char * const primarySsid) const {
+  void GetDataSsids(SsidSet& output, const char * const primarySsid) const override {
     const PrimaryChannelMap::const_iterator pssid = _primaryChannels.find(primarySsid);
     if (pssid == _primaryChannels.end()) return;
 
-    for (DataChannelBridgeMap::const_iterator i = pssid->second.dataChannels.begin(); i != pssid->second.dataChannels.end(); i++) {
+    for (auto i = pssid->second.dataChannels.begin(); i != pssid->second.dataChannels.end(); i++) {
       output.insert(i->first);
     }
   }
 
-  virtual const char *GetSsidIfname(const char * const ssid) const {
-    PrimaryChannelMap::const_iterator pssid = _primaryChannels.find(ssid);
+  const char *GetSsidIfname(const char * const ssid) const override {
+    auto pssid = _primaryChannels.find(ssid);
     if (pssid != _primaryChannels.end()) {
       if (pssid->second.bridgeName.empty()) {
         return NULL;
@@ -167,8 +167,8 @@ public:
 
     return NULL;
   }
-  virtual void GetStationTrafficFilterProfiles(StationTFPMap& output) const {
-    for (StationFilterMap::const_iterator i = _stationFilters.begin(); i != _stationFilters.end(); i++) {
+  void GetStationTrafficFilterProfiles(StationTFPMap& output) const override {
+    for (auto i = _stationFilters.begin(); i != _stationFilters.end(); i++) {
       output[i->first] = i->second;
     }
 

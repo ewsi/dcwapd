@@ -48,7 +48,7 @@ const BasicChannel& SimpleNetwork::GetPrimaryChannel() const {
 }
 
 void SimpleNetwork::GetDataChannels(ChannelSet& output) const {
-  for (std::list<SimpleChannel>::const_iterator i = _dataChannels.begin(); i != _dataChannels.end(); i++) {
+  for (auto i = _dataChannels.begin(); i != _dataChannels.end(); i++) {
     output.insert(&(*i));
   }
 }

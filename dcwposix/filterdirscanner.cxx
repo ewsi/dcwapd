@@ -12,7 +12,7 @@
 
 namespace {
 struct FilterDirScanFailed : public std::exception {
-  virtual const char* what() const throw() {
+  const char* what() const noexcept override {
     return "Failed to scan for filter files!";
   }
 };
@@ -56,7 +56,7 @@ void FilterdirScanner::Scan(FileFilterProfileList& output) {
     filterName.resize(filterName.size() - strlen(matchExtension));
 
     //create the filename with the path...
-    filterFilePath  = _path.c_str();
+    filterFilePath  = _path;
     filterFilePath += '/';
     filterFilePath += de->d_name;
 

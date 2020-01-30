@@ -22,10 +22,10 @@ public:
   BrctlChannel(const char * const ssidName, const char * const brifName);
   BrctlChannel(const BrctlChannel& rhv);
   BrctlChannel(const BasicChannel& bc);
-  virtual ~BrctlChannel();
+  ~BrctlChannel() override;
 
-  virtual const char *GetSsidName() const;
-  virtual const char *GetIfName() const;
+  const char *GetSsidName() const override;
+  const char *GetIfName() const;
 
 private:
   void ValidateBrifName() const;
@@ -37,9 +37,9 @@ class BrctlNetwork : public ::dcw::BasicNetwork {
 
 public:
   BrctlNetwork(const char * const primarySsidName, const char * const primaryBrifName);
-  virtual ~BrctlNetwork();
-  virtual const ::dcw::BasicChannel& GetPrimaryChannel() const;
-  virtual void GetDataChannels(ChannelSet& output) const;
+  ~BrctlNetwork() override;
+  const ::dcw::BasicChannel& GetPrimaryChannel() const override;
+  void GetDataChannels(ChannelSet& output) const override;
   void InsertDataChannel(const char * const ssidName, const char *brifName = NULL); //NULL = no interface remap...
 
 };

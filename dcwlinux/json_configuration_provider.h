@@ -14,13 +14,13 @@ class JsonConfigurationProvider : public APConfigurationProvider {
 
 public:
   explicit JsonConfigurationProvider(const char * const confFilename);
-  virtual ~JsonConfigurationProvider();
+  ~JsonConfigurationProvider() override;
 
-  virtual void InstanciateCFileTrafficFilterProfiles(CFTFPList& output) const;
-  virtual void GetPrimarySsids(SsidSet& output) const;
-  virtual void GetDataSsids(SsidSet& output, const char * const primarySsid) const;
-  virtual const char *GetSsidIfname(const char * const ssid) const;
-  virtual void GetStationTrafficFilterProfiles(StationTFPMap& output) const;
+  void InstanciateCFileTrafficFilterProfiles(CFTFPList& output) const override;
+  void GetPrimarySsids(SsidSet& output) const override;
+  void GetDataSsids(SsidSet& output, const char * const primarySsid) const override;
+  const char *GetSsidIfname(const char * const ssid) const override;
+  void GetStationTrafficFilterProfiles(StationTFPMap& output) const override;
 };
 
 } // namespace dcwlinux

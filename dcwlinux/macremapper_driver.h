@@ -14,15 +14,15 @@ class MacRemapperDriver : public dcw::TrafficSorter {
 
 public:
   MacRemapperDriver();
-  virtual ~MacRemapperDriver();
+  ~MacRemapperDriver() override;
 
   void Dump() const;
 
   static bool ValidateFilter(const ::dcw::CFileTrafficFilterProfile& filter);
   void ParseAndLoadFilter(const ::dcw::CFileTrafficFilterProfile& filter);
 
-  virtual void ApplyClientTrafficPolicy(const dcw::MacAddress& primaryAddr, const dcw::TrafficPolicy& policy);
-  virtual void RemoveClientTrafficPolicy(const dcw::MacAddress& primaryAddr);
+  void ApplyClientTrafficPolicy(const dcw::MacAddress& primaryAddr, const dcw::TrafficPolicy& policy) override;
+  void RemoveClientTrafficPolicy(const dcw::MacAddress& primaryAddr) override;
 
 private:
 

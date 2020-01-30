@@ -25,7 +25,7 @@ class Controller : private EventReactor::IOSubscriber {
 
 public:
   Controller(const DevicePolicy& devicePolicy, TrafficSorter& trafficSorter, const BasicNetwork& network, EventReactor& eventReactor, MessageSocket& msgSocket);
-  virtual ~Controller();
+  ~Controller() override;
 
   void SetTelemetryCollector(TelemetryCollector * const telemetryCollector);
 
@@ -40,7 +40,7 @@ private:
   ClientStateMap _clients;
   TelemetryCollector * _telemetryCollector;
 
-  virtual void OnIOReady(EventReactor::IOProvider& iop);
+  void OnIOReady(EventReactor::IOProvider& iop) override;
   void OnMessage(const MacAddress& source, const Message& msg);
   void OnStationJoin(const MacAddress& primaryMacAddr, const Message& msg);
   void OnStationUnjoin(const MacAddress& primaryMacAddr, const Message& msg);

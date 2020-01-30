@@ -9,7 +9,7 @@
 
 namespace {
 struct ActivateDataChannelFailedException : public std::exception {
-  virtual const char* what() const throw() {
+  virtual const char* what() const noexcept {
     return "Failed to activate data channel";
   }
 };
